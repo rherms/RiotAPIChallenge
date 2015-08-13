@@ -162,7 +162,10 @@ def processMatch(matchId):
 		player["kills"] = int(stats["kills"])
 		player["assists"] = int(stats["assists"])
 		player["deaths"] = int(stats["deaths"])
-		player["kda"] = round((float(player["kills"]) + float(player["assists"]) / 2.0) / float(player["deaths"]), 2) # our own kda where assists are worth one third of kills
+		if(player["deaths"] == 0):
+			player["kda"] = 100 # just a really big number because we will be doing arithmetic on it later
+		else:
+			player["kda"] = round((float(player["kills"]) + float(player["assists"]) / 2.0) / float(player["deaths"]), 2) # our own kda where assists are worth one third of kills
 		player["goldEarned"] = int(stats["goldEarned"])
 		player["item0"] = str(stats["item0"])
 		player["item1"] = str(stats["item1"])
