@@ -1,33 +1,29 @@
 import urllib2, json, time, sys
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.externals import joblib
 
 # This script takes in a json file of match ids as the first argument and processes each match.
 # Processing a match involves making the API request to get match data, generating our own player
 # objects and data, and determining which players carried.
 
-def loadChamps():
-	champDict = {}
-	with open("champData.json") as f:
+def normalize(x, maxX, minX):
+	return float(x - minX) / (maxX - minX)
+
+def loadDict(filename):
+	newDict = {}
+	with open(filename) as f:
 		for line in f:
 			line = line.strip()
 			line = line.split("::") # our delimiter
-			id = line[0]
-			name = line[1]
-			champDict[id] = name
-	return champDict
+			key = line[0]
+			val = line[1]
+			newDict[key] = val
+	return newDict
 
-def loadItems():
-	itemDict = {}
-	with open("itemData.json") as f:
-		for line in f:
-			line = line.strip()
-			line = line.split("::") # our delimiter
-			id = line[0]
-			name = line[1]
-			itemDict[id] = name
-	return itemDict
-
-itemDict = loadItems()
-champDict = loadChamps()
+normDict = loadDict("normData.txt")
+itemDict = loadDict("itemData.json")
+champDict = loadDict("champData.json")
+model = joblib.load("knnModel.pkl")
 
 # Appends the given string plus a new line to the file. Useful for populating our json files.
 def appendToFile(filename, string):
@@ -91,7 +87,30 @@ def generateTrainingData(players, matchId):
 					+ "%," + str(player["damagePerc"]) + "%," + str(player["goldPerc"]) + "%")
 			f.write("\n")
 
-	while(True):
+	for i in range(0, len(players)):
+		player = players[i]
+		kills = normalize(player["kills"], float(normDict["maxKills"]), float(normDict["minKills"]))
+		deaths = normalize(player["deaths"], float(normDict["maxDeaths"]), float(normDict["minDeaths"]))
+		assists = normalize(player["assists"], float(normDict["maxAssists"]), float(normDict["minAssists"]))
+		kda = normalize(player["kda"], float(normDict["maxKda"]), float(normDict["minKda"]))
+		gold = normalize(player["goldEarned"], float(normDict["maxGold"]), float(normDict["minGold"]))
+		damage = normalize(player["totalDamage"], float(normDict["maxDam"]), float(normDict["minDam"]))
+		kdaDiff = normalize(player["avgKdaDiff"], float(normDict["maxKdaDiff"]), float(normDict["minKdaDiff"]))
+		goldDiff = normalize(player["avgGoldDiff"], float(normDict["maxGoldDiff"]), float(normDict["minGoldDiff"]))
+		damDiff = normalize(player["avgDamageDiff"], float(normDict["maxDamDiff"]), float(normDict["minDamDiff"]))
+		killPart = normalize(player["killPart"], float(normDict["maxKillPart"]), float(normDict["minKillPart"]))
+		damPerc = normalize(player["damagePerc"], float(normDict["maxDamPerc"]), float(normDict["minDamPerc"]))
+
+		X = [kills, deaths, assists, kda, gold, damage, kdaDiff, goldDiff, damDiff, killPart, damPerc]
+		carry = model.predict([X])[0]
+		if(carry == 1):
+			print("Model predicts player at index " + str(i) + " carried.")
+		#else:
+			#print("Model predicts player at index " + str(i) + " DID NOT carry.")
+	raw_input("Press any key...")
+	#exit()		
+
+	'''while(True):
 		index = raw_input("Index of someone who carried (negative number or enter to stop): ")
 		if(index == ""):
 			break
@@ -105,18 +124,17 @@ def generateTrainingData(players, matchId):
 		verified = verifyInput(index)
 		if(verified):
 			print("Player at index " + str(index) + " marked as a carry.")
-			player = players[index]
-			player["carried"] = True
+			players[index]["carried"] = True
 		else:
 			print("Player at index " + str(index) + " NOT marked as a carry.")		
 
 	for player in players:
-		appendToFile("trainingData.json", str(player) + ",") # remove this after model is trained
+		appendToFile("trainingData.json", json.dumps(player)) # remove this after model is trained
 		if(player["carried"]):
-			appendToFile("carryPlayers.json", str(player) + ",")
+			appendToFile("carryPlayers.json", json.dumps(player))
 
 	#exit() #comment this when ready for real
-	appendToFile("processedMatches.txt", matchId)
+	#appendToFile("processedMatches.txt", matchId)'''
 
 def processMatch(matchId):
 	region = "na"
@@ -130,12 +148,13 @@ def processMatch(matchId):
 	except urllib2.HTTPError, e:
 		if(e.code != 200):
 			print("Error in API request for processMatch :(")
-			if(content.code == 429): # too many requests
+			if(e.code == 429 or e.code == 503): # too many requests
+				print("Sleeping for a second until trying again.")
 				time.sleep(1) # sleep a second before trying again
 				processMatch(matchId)
 				return
 			else:
-				print("Aborting processing of match: " + str(matchId))
+				print("Aborting processing of match: " + str(matchId) + " due to error code: " + str(e.code))
 				return
 
 	response = str(content.read()) # str() so that it is not unicode
@@ -163,7 +182,7 @@ def processMatch(matchId):
 		player["assists"] = int(stats["assists"])
 		player["deaths"] = int(stats["deaths"])
 		if(player["deaths"] == 0):
-			player["kda"] = 100 # just a really big number because we will be doing arithmetic on it later
+			player["kda"] = (player["kills"] + player["assists"] / 2) * 2 # can't make it too big because of k nearest neighbors
 		else:
 			player["kda"] = round((float(player["kills"]) + float(player["assists"]) / 2.0) / float(player["deaths"]), 2) # our own kda where assists are worth one third of kills
 		player["goldEarned"] = int(stats["goldEarned"])
@@ -224,7 +243,6 @@ def processMatch(matchId):
 		player["championName"] = getChampName(player["championId"])
 		for i in range(0, 7):
 			player["itemName" + str(i)] = getItemName(player["item" + str(i)])
-		appendToFile("trainingData.json", str(player) + ",")
 	generateTrainingData(players, matchId)
 
 if __name__ == "__main__":
