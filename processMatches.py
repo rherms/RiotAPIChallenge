@@ -1,7 +1,7 @@
 import urllib2, json, time, sys
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.externals import joblib
-
+import sqlite3
 # This script takes in a json file of match ids as the first argument and processes each match.
 # Processing a match involves making the API request to get match data, generating our own player
 # objects and data, and determining which players carried.
@@ -20,23 +20,29 @@ def loadDict(filename):
 			newDict[key] = val
 	return newDict
 
-normDict = loadDict("normData.txt")
-itemDict = loadDict("itemData.json")
-champDict = loadDict("champData.json")
-model = joblib.load("knnModel.pkl")
-
-# Appends the given string plus a new line to the file. Useful for populating our json files.
-def appendToFile(filename, string):
-	with open(filename, "a") as f:
-		f.write(string + "\n")
-		f.close()
-
 # put api key into file to protect it
 def loadAPIKey():
 	with open("apiKey.txt") as f:
 		for line in f:
 			# first line is api key
 			return str(line.strip())
+
+if(len(sys.argv) < 3):
+	print("Please run with a .json file of matchIds as the 1st argument and a .db file to store the results as the 2nd argument")
+	exit()
+db = sqlite3.connect(sys.argv[2])
+cursor = db.cursor()
+normDict = loadDict("normData.txt")
+itemDict = loadDict("itemData.json")
+champDict = loadDict("champData.json")
+model = joblib.load("knnModel.pkl")
+apiKey = loadAPIKey()
+
+# Appends the given string plus a new line to the file. Useful for populating our json files.
+def appendToFile(filename, string):
+	with open(filename, "a") as f:
+		f.write(string + "\n")
+		f.close()
 
 # Gets a yes or no from the user. Returns true if yes, false if no.
 def verifyInput(index):
@@ -76,7 +82,7 @@ def getItemName(itemId):
 		return itemDict[itemId]
 
 def generateTrainingData(players, matchId):
-	with open("matchStats" + matchId + ".csv", "w") as f:
+	'''with open("matchStats" + matchId + ".csv", "w") as f:
 		f.write("Index,Champion,Kills,Deaths,Assists,KDA,Gold,Damage,avgKdaDiff,avgGoldDiff,avgDamageDiff,killPart,damagePerc,goldPerc")
 		f.write("\n")
 		for i in range(0, len(players)):
@@ -85,7 +91,7 @@ def generateTrainingData(players, matchId):
 					+ str(player["kda"]) + "," + str(player["goldEarned"]) + "," + str(player["totalDamage"]) + "," \
 					+ str(player["avgKdaDiff"]) + "," + str(player["avgGoldDiff"]) + "," + str(player["avgDamageDiff"]) + "," + str(player["killPart"])
 					+ "%," + str(player["damagePerc"]) + "%," + str(player["goldPerc"]) + "%")
-			f.write("\n")
+			f.write("\n")'''
 
 	for i in range(0, len(players)):
 		player = players[i]
@@ -104,11 +110,26 @@ def generateTrainingData(players, matchId):
 		X = [kills, deaths, assists, kda, gold, damage, kdaDiff, goldDiff, damDiff, killPart, damPerc]
 		carry = model.predict([X])[0]
 		if(carry == 1):
-			print("Model predicts player at index " + str(i) + " carried.")
+			#print("Model predicts player at index " + str(i) + " carried.")
+			players[i]["carried"] = True # might not need this line
+			player["carried"] = 1 # need integer for sqlite3 database
+		else:
+			player["carried"] = 0 # need int
+
+		cursor.execute("INSERT INTO players VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", \
+					   (player["matchId"], player["duration"], player["teamId"], player["patch"], player["gameMode"], \
+					   player["region"], player["championId"], player["item0"], player["item1"], player["item2"], \
+					   player["item3"], player["item4"], player["item5"], player["item6"], player["kills"], \
+					   player["deaths"], player["assists"], player["kda"], player["goldEarned"], player["totalDamage"], \
+					   player["magicDamage"], player["physDamage"], player["avgDamageDiff"], player["avgGoldDiff"], \
+					   player["avgKdaDiff"], player["killPart"], player["damagePerc"], player["goldPerc"], player["carried"]))
 		#else:
 			#print("Model predicts player at index " + str(i) + " DID NOT carry.")
-	raw_input("Press any key...")
+	#raw_input("Press any key...")
 	#exit()		
+
+	db.commit()
+	appendToFile("processedMatches.txt", matchId)
 
 	'''while(True):
 		index = raw_input("Index of someone who carried (negative number or enter to stop): ")
@@ -136,10 +157,9 @@ def generateTrainingData(players, matchId):
 	#exit() #comment this when ready for real
 	#appendToFile("processedMatches.txt", matchId)'''
 
-def processMatch(matchId):
-	region = "na"
+def processMatch(matchId, fileRegion):
+	region = fileRegion
 	matchVersion = "2.2"
-	apiKey = loadAPIKey()
 	url = "https://na.api.pvp.net/api/lol/" + region + "/v" + matchVersion + "/match/" + matchId + "?api_key=" + apiKey
 
 	# simple API request to get response as plaintext
@@ -147,16 +167,20 @@ def processMatch(matchId):
 		content = urllib2.urlopen(url)
 	except urllib2.HTTPError, e:
 		if(e.code != 200):
-			print("Error in API request for processMatch :(")
-			if(e.code == 429 or e.code == 503): # too many requests
-				print("Sleeping for a second until trying again.")
-				time.sleep(1) # sleep a second before trying again
-				processMatch(matchId)
+			print("Error in API request for processMatch :(    " + str(e.code))
+			if(e.code == 429): # too many requests
+				secsToSleep = 2
+				if "Retry-After" in e.headers:
+					secsToSleep = int(e.headers["Retry-After"])
+				print("Sleeping for " + str(secsToSleep) + " seconds until trying again.")
+				time.sleep(secsToSleep) # sleep 2 seconds before trying again
+				processMatch(matchId, fileRegion)
 				return
 			else:
 				print("Aborting processing of match: " + str(matchId) + " due to error code: " + str(e.code))
 				return
 
+	time.sleep(2) # sleep for 1.5 seconds to avoid exceeding rate limit	
 	response = str(content.read()) # str() so that it is not unicode
 	# convert response to json
 	response = json.loads(response)
@@ -164,6 +188,7 @@ def processMatch(matchId):
 	region = response["region"]
 	gameMode = response["queueType"]
 	patch = response["matchVersion"]
+	duration = response["matchDuration"]
 
 	players = [] # our array to populate
 	participants = response["participants"]
@@ -175,7 +200,7 @@ def processMatch(matchId):
 	totalGold200 = 0
 	for participant in participants:
 		# initialize with fields that are same for every player
-		player = {"region": str(region), "gameMode": str(gameMode), "patch": str(patch), "matchId": str(matchId)}
+		player = {"region": str(region), "gameMode": str(gameMode), "patch": str(patch), "matchId": str(matchId), "duration": str(duration)}
 		player["championId"] = str(participant["championId"])
 		stats = participant["stats"]
 		player["kills"] = int(stats["kills"])
@@ -212,13 +237,32 @@ def processMatch(matchId):
 
 	for player in players:
 		if(player["teamId"] == 100):
-			player["killPart"] = int(round(float(player["kills"] + player["assists"]) / totalKills100, 2) * 100)
-			player["damagePerc"] = int(round(float(player["totalDamage"]) / totalDamage100, 2) * 100)
-			player["goldPerc"] = int(round(float(player["goldEarned"]) / totalGold100, 2) * 100)
+			if(totalKills100 == 0):
+				player["killPart"] = 0
+			else:
+				player["killPart"] = int(round(float(player["kills"] + player["assists"]) / totalKills100, 2) * 100)
+			if(totalDamage100 == 0):
+				player["damagePerc"] = 0
+			else:
+				player["damagePerc"] = int(round(float(player["totalDamage"]) / totalDamage100, 2) * 100)
+			if(totalGold100 == 0):
+				player["goldPerc"] = 0
+			else:
+				player["goldPerc"] = int(round(float(player["goldEarned"]) / totalGold100, 2) * 100)
+
 		elif(player["teamId"] == 200):
-			player["killPart"] = int(round(float(player["kills"] + player["assists"]) / totalKills200, 2) * 100)
-			player["damagePerc"] = int(round(float(player["totalDamage"]) / totalDamage200, 2) * 100)
-			player["goldPerc"] = int(round(float(player["goldEarned"]) / totalGold200, 2) * 100)
+			if(totalKills200 == 0):
+				player["killPart"] = 0
+			else:
+				player["killPart"] = int(round(float(player["kills"] + player["assists"]) / totalKills200, 2) * 100)
+			if(totalDamage200 == 0):
+				player["damagePerc"] = 0
+			else:
+				player["damagePerc"] = int(round(float(player["totalDamage"]) / totalDamage200, 2) * 100)
+			if(totalGold200 == 0):
+				player["goldPerc"] = 0
+			else:
+				player["goldPerc"] = int(round(float(player["goldEarned"]) / totalGold200, 2) * 100)
 
 
 		goldEarned = player["goldEarned"]
@@ -247,8 +291,10 @@ def processMatch(matchId):
 
 if __name__ == "__main__":
 	processedMatches = loadProcessedMatches()
-	print("You have trained for " + str(len(processedMatches)) + " matches already! :)")
 
+	dirs = (sys.argv[1].split("\\"))
+	jsonFile = dirs[len(dirs) - 1]
+	fileRegion = jsonFile.replace(".json", "").lower()
 	with open(sys.argv[1]) as f:
 		for line in f:
 			# skip over non match ids
@@ -257,7 +303,7 @@ if __name__ == "__main__":
 			line = line.strip() # remove \r\n
 			matchId = line.replace(",", "") # remove comma
 			if(not matchId in processedMatches):
-				print("Advancing to match: " + matchId)
-				processMatch(matchId)
+				print("Advancing to match: " + matchId + "     " + str(len(processedMatches)) + " have been processed already.")
+				processMatch(matchId, fileRegion)
 			else:
 				print("Skipping over match: " + matchId + " because it was already processed.")
