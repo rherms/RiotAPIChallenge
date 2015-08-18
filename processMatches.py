@@ -33,8 +33,8 @@ if(len(sys.argv) < 3):
 db = sqlite3.connect(sys.argv[2])
 cursor = db.cursor()
 normDict = loadDict("normData.txt")
-itemDict = loadDict("itemData.json")
-champDict = loadDict("champData.json")
+itemDict = loadDict("itemData.txt")
+champDict = loadDict("champData.txt")
 model = joblib.load("knnModel.pkl")
 apiKey = loadAPIKey()
 
@@ -157,7 +157,7 @@ def generateTrainingData(players, matchId):
 	#exit() #comment this when ready for real
 	#appendToFile("processedMatches.txt", matchId)'''
 
-def processMatch(matchId, fileRegion):
+def processMatch(matchId, fileRegion, timeToSleep):
 	region = fileRegion
 	matchVersion = "2.2"
 	url = "https://na.api.pvp.net/api/lol/" + region + "/v" + matchVersion + "/match/" + matchId + "?api_key=" + apiKey
@@ -169,18 +169,20 @@ def processMatch(matchId, fileRegion):
 		if(e.code != 200):
 			print("Error in API request for processMatch :(    " + str(e.code))
 			if(e.code == 429): # too many requests
-				secsToSleep = 2
-				if "Retry-After" in e.headers:
-					secsToSleep = int(e.headers["Retry-After"])
-				print("Sleeping for " + str(secsToSleep) + " seconds until trying again.")
-				time.sleep(secsToSleep) # sleep 2 seconds before trying again
-				processMatch(matchId, fileRegion)
+				#secsToSleep = 2
+				#if "Retry-After" in e.headers:
+				#	secsToSleep = int(e.headers["Retry-After"])
+				if(timeToSleep < 4.0):
+					timeToSleep += 1
+				print("Sleeping for " + str(timeToSleep) + " seconds until trying again.")
+				time.sleep(timeToSleep) # sleep 2 seconds before trying again
+				processMatch(matchId, fileRegion, timeToSleep)
 				return
 			else:
 				print("Aborting processing of match: " + str(matchId) + " due to error code: " + str(e.code))
 				return
 
-	time.sleep(2) # sleep for 1.5 seconds to avoid exceeding rate limit	
+	time.sleep(timeToSleep) # sleep for 1.5 seconds to avoid exceeding rate limit	
 	response = str(content.read()) # str() so that it is not unicode
 	# convert response to json
 	response = json.loads(response)
@@ -291,6 +293,7 @@ def processMatch(matchId, fileRegion):
 
 if __name__ == "__main__":
 	processedMatches = loadProcessedMatches()
+	timeToSleep = 2.4
 
 	dirs = (sys.argv[1].split("\\"))
 	jsonFile = dirs[len(dirs) - 1]
@@ -304,6 +307,6 @@ if __name__ == "__main__":
 			matchId = line.replace(",", "") # remove comma
 			if(not matchId in processedMatches):
 				print("Advancing to match: " + matchId + "     " + str(len(processedMatches)) + " have been processed already.")
-				processMatch(matchId, fileRegion)
+				processMatch(matchId, fileRegion, timeToSleep)
 			else:
 				print("Skipping over match: " + matchId + " because it was already processed.")
