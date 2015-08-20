@@ -160,7 +160,7 @@ def generateTrainingData(players, matchId):
 def processMatch(matchId, fileRegion, timeToSleep):
 	region = fileRegion
 	matchVersion = "2.2"
-	url = "https://na.api.pvp.net/api/lol/" + region + "/v" + matchVersion + "/match/" + matchId + "?api_key=" + apiKey
+	url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v" + matchVersion + "/match/" + matchId + "?api_key=" + apiKey
 
 	# simple API request to get response as plaintext
 	try:
