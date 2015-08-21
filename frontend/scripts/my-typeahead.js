@@ -13,7 +13,7 @@ var data = {
             href: "https://en.wikipedia.org/?title={{display}}",
             template: "{{display}}, <small><em>{{group}}</em></small>",
             source: {
-                champion: {
+                champ: {
                     data: data.champions
                 },
                 item: {

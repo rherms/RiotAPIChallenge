@@ -1599,7 +1599,7 @@
 			}
 
 	#header-wrapper {
-		background: url("../../images/league-background.jpg") center center;
+		background: url("../../images/Vayne_0.jpg");
 		background-size: cover;
 		opacity: 0.9;
 	}
@@ -1822,8 +1822,8 @@
 				padding: 0 2.25em 0 2.25em;
 				font-size: 0.9em;
 				min-width: 12em;
-				height: 4em;
-				line-height: 4em;
+				height: 3em;
+				line-height: 3em;
 			}
 
 				input[type="button"].big,
