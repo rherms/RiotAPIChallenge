@@ -111,7 +111,9 @@ if __name__ == '__main__':
 		"kda": 0,
 		"damage": 0,
 		"killPart": 0,
-		"damagePerc": 0
+		"damagePerc": 0,
+		"magicDamage": 0, # comment these in/out
+		"physDamage": 0 # comment these in/out
 	}
 
 	defaultObj = {
@@ -123,10 +125,11 @@ if __name__ == '__main__':
 		"KR": copy.deepcopy(defaultStats)
 	}
 
-	for champId in champDict: 
-		if(champId in processedChamps):
-			print("Champion " + champId + " already processed. Skipping.")
-			continue
+	champs = ["96", "81"]
+	for champId in champs: # should be champDict
+		#if(champId in processedChamps):
+		#	print("Champion " + champId + " already processed. Skipping.")
+		#	continue
 		champStats = {
 			"title": "",
 			"name": "",
@@ -165,7 +168,7 @@ if __name__ == '__main__':
 			count = rows[0][0] # first row, tuple of just one value
 			champStats[patch][region]["gamesCarried"] = count
 
-			cursor.execute("SELECT item0, item1, item2, item3, item4, item5, item6, kills, deaths, assists, totalDamage, killPart, damagePerc from players where carried=1 and championId=" + champId)
+			cursor.execute("SELECT item0, item1, item2, item3, item4, item5, item6, kills, deaths, assists, totalDamage, killPart, damagePerc, magicDamage, physDamage from players where carried=1 and championId=" + champId)
 			rows = cursor.fetchall()
 			for row in rows:
 				items = row[:7]
@@ -181,6 +184,8 @@ if __name__ == '__main__':
 				damage = row[10]
 				killPart = row[11]
 				damagePerc = row[12]
+				magicDamage = row[13]
+				physDamage = row[14]
 
 				champStats[patch][region]["kills"] += kills
 				champStats[patch][region]["deaths"] += deaths
@@ -188,6 +193,8 @@ if __name__ == '__main__':
 				champStats[patch][region]["damage"] += damage
 				champStats[patch][region]["killPart"] += killPart
 				champStats[patch][region]["damagePerc"] += damagePerc
+				champStats[patch][region]["magicDamage"] += magicDamage
+				champStats[patch][region]["physDamage"] += physDamage
 			if(champStats[patch][region]["deaths"] == 0):
 				champStats[patch][region]["kda"] = 100
 			else:
@@ -200,6 +207,8 @@ if __name__ == '__main__':
 				champStats[patch][region]["damage"] /= gamesCarried
 				champStats[patch][region]["killPart"] /= gamesCarried
 				champStats[patch][region]["damagePerc"] /= gamesCarried
+				champStats[patch][region]["magicDamage"] /= gamesCarried
+				champStats[patch][region]["physDamage"] /= gamesCarried
 
 			cursor.execute("SELECT matchId, teamId from players where carried=1 and championId=" + champId)
 			rows = cursor.fetchall()
@@ -226,6 +235,8 @@ if __name__ == '__main__':
 		champStats["5.11"]["total"]["damage"] = sumOfKey(champStats, "5.11", "damage") / 5.0
 		champStats["5.11"]["total"]["killPart"] = sumOfKey(champStats, "5.11", "killPart") / 5.0
 		champStats["5.11"]["total"]["damagePerc"] = sumOfKey(champStats, "5.11", "damagePerc") / 5.0
+		champStats["5.11"]["total"]["magicDamage"] = sumOfKey(champStats, "5.11", "magicDamage") / 5.0
+		champStats["5.11"]["total"]["physDamage"] = sumOfKey(champStats, "5.11", "physDamage") / 5.0
 		for itemId in champStats["5.11"]["total"]["items"]:
 			champStats["5.11"]["total"]["items"][itemId] = champStats["5.11"]["NA"]["items"][itemId] + champStats["5.11"]["BR"]["items"][itemId] \
 			+ champStats["5.11"]["EUW"]["items"][itemId] + champStats["5.11"]["KR"]["items"][itemId] + champStats["5.11"]["EUNE"]["items"][itemId]
@@ -242,6 +253,8 @@ if __name__ == '__main__':
 		champStats["5.14"]["total"]["damage"] = sumOfKey(champStats, "5.14", "damage") / 5.0
 		champStats["5.14"]["total"]["killPart"] = sumOfKey(champStats, "5.14", "killPart") / 5.0
 		champStats["5.14"]["total"]["damagePerc"] = sumOfKey(champStats, "5.14", "damagePerc") / 5.0
+		champStats["5.14"]["total"]["magicDamage"] = sumOfKey(champStats, "5.14", "magicDamage") / 5.0
+		champStats["5.14"]["total"]["physDamage"] = sumOfKey(champStats, "5.14", "physDamage") / 5.0
 		for itemId in champStats["5.14"]["total"]["items"]:
 			champStats["5.14"]["total"]["items"][itemId] = champStats["5.14"]["NA"]["items"][itemId] + champStats["5.14"]["BR"]["items"][itemId] \
 			+ champStats["5.14"]["EUW"]["items"][itemId] + champStats["5.14"]["KR"]["items"][itemId] + champStats["5.14"]["EUNE"]["items"][itemId]
@@ -249,9 +262,9 @@ if __name__ == '__main__':
 			champStats["5.14"]["total"]["champs"][chId] = champStats["5.14"]["NA"]["champs"][chId] + champStats["5.14"]["BR"]["champs"][chId] \
 			+ champStats["5.14"]["EUW"]["champs"][chId] + champStats["5.14"]["KR"]["champs"][chId] + champStats["5.14"]["EUNE"]["champs"][chId]
 
-		with open("jsonFiles/champions/" + champId + ".json", "w") as f:
+		with open("jsonFiles/champions/" + champId + "-extra.json", "w") as f:
 			f.write(json.dumps(champStats))
 			f.close()
-		with open("processedChamps.txt", "a") as f:
-			f.write(champId + "\n")
-			f.close()
+		#with open("processedChamps.txt", "a") as f:
+		#	f.write(champId + "\n")
+		#	f.close()

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	
+    $("#NA").click(function(){
+        $("#na-div").show();
+        $('#kr-div').hide();
+    });
+    $("#KR").click(function(){
+        $("#na-div").hide();
+        $("#kr-div").show();
+    });
+});
+</script>
+</head>
+<body>
+
+<div id="na-div">NA</div>
+<div id="kr-div">KR</div>
+
+<button id="NA">NA</button>
+<button id="KR">KR</button>
+
+</body>
+</html>

@@ -1599,8 +1599,9 @@
 			}
 
 	#header-wrapper {
-		background: url("../../images/banner.jpg") center center;
+		background: url("../../images/league-background.jpg") center center;
 		background-size: cover;
+		opacity: 0.9;
 	}
 
 		#header-wrapper:before {
