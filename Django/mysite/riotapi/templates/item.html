@@ -10,7 +10,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="/static/assets/css/champion-page.css" />
+		<link rel="stylesheet" href="/static/assets/css/item-page.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 
 		<!-- Scripts -->
@@ -35,7 +35,8 @@
 						<!-- Logo -->
 							<div id="logo">
 								<h1 id="champName"></h1>
-								<p id="champTitle"></p>
+								<br>
+								<img id="itemImage" width="100" height="100"></img>
 							</div>
 
 						<!-- Nav -->
@@ -103,10 +104,8 @@
 												<div>Carry Rate</div>	
 												<div id="totalCarried511">Total Games Carried: </div>
 												<div id="totalGames511">Total Games Analyzed: </div>
-												<div id="kda511">Average KDA: </div>
-												<div id="killPart511">Average Kill Participation: </div>
-												<div id="damage511">Average Damage Dealt Per Game: </div>
-												<div id="damagePerc511">Average Percent of Team's Damage: </div>
+												Stats:
+												<div class="stats"></div>
 												</center></p>
 												
 											</section>
@@ -119,10 +118,8 @@
 												<div>Carry Rate</div>											
 												<div id="totalCarried514">Total Games Carried: </div>
 												<div id="totalGames514">Total Games Analyzed: </div>
-												<div id="kda514">Average KDA: </div>
-												<div id="killPart514">Average Kill Participation: </div>
-												<div id="damage514">Average Damage Dealt Per Game: </div>
-												<div id="damagePerc514">Average Percent of Team's Damage: </div>
+												Stats:
+												<div class="stats"></div>
 												</center></p>
 											</section>
 										</div>
@@ -140,7 +137,7 @@
 									<header class="style1">
 										<h2>Item Synergy<br class="mobile-hide" />
 										</h2>
-										<p>Top 5 items built in carried games from each patch. <br>There may be overlap so anywhere from 5-10 will show up.</p>
+										<p>Top 5 items built along with this one in carried games from each patch. <br>There may be overlap so anywhere from 5-10 will show up.</p>
 									</header>
 									<!--<a href="#" class="image featured">
 										<img src="images/pic01.jpg" alt="" />
@@ -156,7 +153,7 @@
 									<header class="style1">
 										<h2>Champion Synergy<br class="mobile-hide" />
 										</h2>
-										<p>Top 5 teammates in carried games from each patch. <br>There may be overlap so anywhere from 5-10 will show up.</p>
+										<p>Top 5 champions from each patch that used this item in carried games. <br>There may be overlap so anywhere from 5-10 will show up.</p>
 									</header>
 									<center>
 									<div id="champion-champion-graph-legend" width="550" height="30">5.11: <img src="/static/images/darkBox.png"><br>	5.14: <img src="/static/images/lightBox.png"></div>
@@ -238,18 +235,20 @@
 							champDict = convertJson(champDict);
 							var itemDict = "{{ itemDict }}";
 							itemDict = convertJson(itemDict);
-							var champId = "{{ champId }}";
+							var itemId = "{{ itemId }}";
 
-							data["title"] = data["title"].replace(/&#39;/g, "\'");
+							//data["title"] = data["title"].replace(/&#39;/g, "\'");
 							data["name"] = data["name"].replace(/&#39;/g, "\'");
+
+							$("#itemImage").attr("src", "/static/images/small/" + itemId + ".png");
+							var desc = data["description"];
+							desc = desc.replace(/&lt;/g, "<");
+							desc = desc.replace(/&gt;/g, ">");
+							$(".stats").html(desc);
 							$("#champName").text(data["name"]);
-							$("#champTitle").text(data["title"]);
-							// set background of the top with the sexy large splash image
-							$("#header-wrapper").css("background", 'url("/static/images/large/' + champId + '.jpg")');
-							$("#header-wrapper").css("background-size", 'cover');
 
 							function invalidId(id) {
-								if(id === champId) return true;
+								if(id === itemId) return true;
 								id = parseInt(id);
 								if(id >= 3340 && id <= 3342) return true; //trinkets
 								if(id >= 3361 && id <= 3364) return true; //upgraded trinkets
@@ -317,23 +316,20 @@
 								data511 = data["5.11"][curRegion];
 								data514 = data["5.14"][curRegion];
 
-						        if(champId === "51") // Caitlyn was disabled
-						        	$("#carryRate511").text("Disabled");
-						        else {
-									var carryRate511 = (data511["gamesCarried"] / data511["gamesPlayed"] * 100).toFixed(2);
-									if(isNaN(carryRate511)) carryRate511 = 0;
-									$('#carryRate511').countTo({
-							            from: 0.00,
-							            to: carryRate511,
-							            speed: 800,
-							            decimals: 2,
-							            refreshInterval: 50,
-							            onComplete: function(value) {
-							                //console.debug(this);
-							            }
-							        });
-						        }
-								var carryRate514 = (data514["gamesCarried"] / data514["gamesPlayed"] * 100).toFixed(2);
+						        
+								var carryRate511 = (data511["gamesCarried"] / data511["gamesBuilt"] * 100).toFixed(2);
+								if(isNaN(carryRate511)) carryRate511 = 0;
+								$('#carryRate511').countTo({
+						            from: 0.00,
+						            to: carryRate511,
+						            speed: 800,
+						            decimals: 2,
+						            refreshInterval: 50,
+						            onComplete: function(value) {
+						                //console.debug(this);
+						            }
+						        });
+								var carryRate514 = (data514["gamesCarried"] / data514["gamesBuilt"] * 100).toFixed(2);
 								if(isNaN(carryRate514)) carryRate514 = 0;
 								//$("#carryRate511").text(carryRate511.toString() + "%");
 								//$("#carryRate514").text(carryRate514.toString() + "%");
@@ -349,18 +345,10 @@
 						        });
 
 								$("#totalCarried511").text("Games Carried: " + data511["gamesCarried"]);
-								$("#totalGames511").text("Games Played: " + data511["gamesPlayed"]);
-								$("#kda511").text("Average KDA: " + format(data511["kda"]));
-								$("#killPart511").text("Average Kill Participation: " + format(data511["killPart"]));
-								$("#damage511").text("Average Damage Dealt: " + Math.round(data511["damage"]));
-								$("#damagePerc511").text("Average Percent of Team's Damage: " + format(data511["damagePerc"]));
+								$("#totalGames511").text("Games Played: " + data511["gamesBuilt"]);
 
 								$("#totalCarried514").text("Games Carried: " + data514["gamesCarried"]);
-								$("#totalGames514").text("Games Played: " + data514["gamesPlayed"]);
-								$("#kda514").text("Average KDA: " + format(data514["kda"]));
-								$("#killPart514").text("Average Kill Participation: " + format(data514["killPart"]));
-								$("#damage514").text("Average Damage Dealt: " + Math.round(data514["damage"]));
-								$("#damagePerc514").text("Average Percent of Team's Damage: " + format(data514["damagePerc"]));
+								$("#totalGames514").text("Games Played: " + data514["gamesBuilt"]);
 
 								var items = getTopData("items", curRegion, data); // holds strings of the ids
 								var champs = getTopData("champs", curRegion, data);
