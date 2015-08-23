@@ -1602,6 +1602,7 @@
 		background: url("../../images/league-background.jpg") center center;
 		background-size: cover;
 		opacity: 0.9;
+		height: 800px;
 	}
 
 		#header-wrapper:before {

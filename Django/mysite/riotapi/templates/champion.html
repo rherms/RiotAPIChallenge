@@ -41,7 +41,7 @@
 						<!-- Nav -->
 							<nav id="nav">
 								<ul>
-									<li class="current"><a href="index.html">Home</a></li>
+									<li class="current"><a href="/">Home</a></li>
 									<li>
 										<a href="#">Dropdown</a>
 										<ul>
@@ -370,7 +370,7 @@
 								var itemCounts514 = []
 								$("#champion-item-graph-images-container").empty(); // remove old images
 								for(var i = 0; i < items.length; i++) {
-									itemLabels.push(itemDict[parseInt(items[i])]);
+									itemLabels.push(itemDict[parseInt(items[i])].replace(/&#39;/g, "'"));
 									itemCounts511.push(data["5.11"][curRegion]["items"][items[i]]);
 									itemCounts514.push(data["5.14"][curRegion]["items"][items[i]]);
 									$("#champion-item-graph-images-container").append('<img src="/static/images/small/blank.png" width="10" height="50"><a href="/items/' + items[i] + '"><img class="graphImage" src="/static/images/small/' + items[i] + '.png" width="50" height="50"></a>')
@@ -405,7 +405,7 @@
 								var champCounts514 = []
 								$("#champion-champion-graph-images-container").empty(); // remove old images
 								for(var i = 0; i < champs.length; i++) {
-									champLabels.push(champDict[parseInt(champs[i])]);
+									champLabels.push(champDict[parseInt(champs[i])].replace(/&#39;/g, "'"));
 									champCounts511.push(data["5.11"][curRegion]["champs"][champs[i]]);
 									champCounts514.push(data["5.14"][curRegion]["champs"][champs[i]]); // ghetto padding since I'm tired of fighting css
 									$("#champion-champion-graph-images-container").append('<img src="/static/images/small/blank.png" width="10" height="50"><a href="/champions/' + champs[i] + '"><img src="/static/images/small/' + champs[i] + '.png" width="50" height="50"></a>');

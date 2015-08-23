@@ -164,7 +164,7 @@ input {
     padding: 6px 12px;
     font-size: 13px;
     line-height: 1.42857143;
-    color: #555555;
+    color: white;
     background: transparent;
     border: 1px solid #cccccc;
     border-radius: 2px 0 0 2px;
@@ -182,7 +182,7 @@ input {
 
 .typeahead-field input:last-child,
 .typeahead-hint {
-    background: #fff;
+    background: transparent;
 }
 
 .typeahead-container button {
@@ -251,6 +251,7 @@ input {
     margin-left: -1px;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
+    letter-spacing: 1px;
 }
 
 .typeahead-query {
