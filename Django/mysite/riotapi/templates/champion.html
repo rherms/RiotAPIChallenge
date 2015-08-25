@@ -5,421 +5,463 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-  <head>
-    <title>Name Coming Soon...</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-	<link rel="stylesheet" href="/static/assets/css/champion-page.css" />
-	<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-	<script src="/static/assets/js/jquery.min.js"></script>
-	<script src="/static/assets/js/jquery.dropotron.min.js"></script>
-	<script src="/static/assets/js/skel.min.js"></script>
-	<script src="/static/assets/js/skel-viewport.min.js"></script>
-	<script src="/static/assets/js/util.js"></script>
-	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-	<script src="/static/assets/js/main.js"></script>
-	<script src='/static/Chart.js-master/Chart.min.js'></script>
+	<head>
+		<title>No Sidebar - Escape Velocity by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/static/assets/css/champion-page.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 
-  </head>
-  <body class="no-sidebar">
-    <div id="page-wrapper">
+		<!-- Scripts -->
 
-	  <!-- Header -->
-	  <div id="header-wrapper" class="wrapper">
-	    <div id="header">
+		<script src="/static/assets/js/jquery.min.js"></script>
+		<script src="/static/assets/js/jquery.dropotron.min.js"></script>
+		<script src="/static/assets/js/skel.min.js"></script>
+		<script src="/static/assets/js/skel-viewport.min.js"></script>
+		<script src="/static/assets/js/util.js"></script>
+		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="/static/assets/js/main.js"></script>
+		<script src='/static/Chart.js-master/Chart.min.js'></script>
 
-	      <!-- Champion Summary -->
-		  <div id="logo">
-		    <h1 id="champName"></h1>
-			<p id="champTitle"></p>
-		  </div>
+	</head>
+	<body class="no-sidebar">
+		<div id="page-wrapper">
 
-		  <!-- Main Statistics Container -->
-		  <div class="wrapper style2">
-		  	<!-- Home Button -->
-					<nav id="nav">
-						<a href="/" class="button style3" id="homeButton">Home</a>
-					</nav>
-		  	<!-- Toggle Region Buttons -->
-		    <center>
-			  <button value="total" class="button style2" id="totalButton">Overall</button> 
-			  <button value="NA" class="button style2" id="naButton">NA</button> 
-			  <button value="KR" class="button style2" id="krButton">KR</button> 
-			  <button value="EUW" class="button style2" id="euwButton">EUW</button>
-			  <button value="EUNE" class="button style2" id="euneButton">EUNE</button>  
-			  <button value="BR" class="button style2" id="brButton">BR</button> 
-			</center> <br>
-			
-			<div id="main" class="container" id="na">	
-			  <section id="features">
-			    <div class="feature-list">
-				  <div class="row">
-				    <div class="6u 12u(mobile)">
+			<!-- Header -->
+				<div id="header-wrapper" class="wrapper">
+					<div id="header">
 
-				      <!-- Pre Patch 5.13 Statistic Summary -->
-					  <section>
-					    <center><h3>Pre Patch 5.13</h3></center>
-						<center><div id="carryRate511"></div></center>
-						<center>
-						  <div>Carry Rate</div>	
-						  <div id="totalCarried511">Total Games Carried: </div>
-						  <div id="totalGames511">Total Games Analyzed: </div>
-						  <div id="kda511">Average KDA: </div>
-						  <div id="killPart511">Average Kill Participation: </div>
-						  <div id="damage511">Average Damage Dealt Per Game: </div>
-						  <div id="damagePerc511">Average Percent of Team's Damage: </div>
-						</center></p>							
-					  </section>
+						<!-- Logo -->
+							<div id="logo">
+								<h1 id="champName"></h1>
+								<p id="champTitle"></p>
+							</div>
+
+						<!-- Nav -->
+							<nav id="nav">
+								<ul>
+									<li class="current"><a href="/">Home</a></li>
+									<li>
+										<a href="#">Dropdown</a>
+										<ul>
+											<li><a href="#">Lorem ipsum</a></li>
+											<li><a href="#">Magna veroeros</a></li>
+											<li><a href="#">Etiam nisl</a></li>
+											<li>
+												<a href="#">Sed consequat</a>
+												<ul>
+													<li><a href="#">Lorem dolor</a></li>
+													<li><a href="#">Amet consequat</a></li>
+													<li><a href="#">Magna phasellus</a></li>
+													<li><a href="#">Etiam nisl</a></li>
+													<li><a href="#">Sed feugiat</a></li>
+												</ul>
+											</li>
+											<li><a href="#">Nisl tempus</a></li>
+										</ul>
+									</li>
+									<li><a href="left-sidebar.html">Left Sidebar</a></li>
+									<li><a href="right-sidebar.html">Right Sidebar</a></li>
+									<li><a href="no-sidebar.html">No Sidebar</a></li>
+								</ul>
+							</nav>
+
 					</div>
-					
-					<div class="6u 12u(mobile)">
+				</div>
 
-					  <!-- Post Patch 5.13 Statistic Summary -->
-					  <section>
-					    <center><h3>Post Patch 5.13</h3></center>
-						<center><div id="carryRate514"></div></center>
-						<center>
-						  <div>Carry Rate</div>											
-						  <div id="totalCarried514">Total Games Carried: </div>
-						  <div id="totalGames514">Total Games Analyzed: </div>
-						  <div id="kda514">Average KDA: </div>
-						  <div id="killPart514">Average Kill Participation: </div>
-						  <div id="damage514">Average Damage Dealt Per Game: </div>
-						  <div id="damagePerc514">Average Percent of Team's Damage: </div>
-						</center></p>
-					  </section>
-				  	</div>
-				  </div>
-			    </div>
-			  </section>
+			<!-- Main -->
+				<div class="wrapper style2">
+					<center>
+						<button value="total" class="button style2" id="totalButton">Overall</button> 
+						<button value="NA" class="button style2" id="naButton">NA</button> 
+						<button value="KR" class="button style2" id="krButton">KR</button> 
+						<button value="EUW" class="button style2" id="euwButton">EUW</button>
+						<button value="EUNE" class="button style2" id="euneButton">EUNE</button>  
+						<button value="BR" class="button style2" id="brButton">BR</button> 
+					</center> <br>
+					<!--<div class="title">No Sidebar</div>-->
+					<div id="main" class="container" id="na">
+						<!-- Image -->
+							<!--<a href="#" class="image featured">
+								<img src="images/pic01.jpg" alt="" />
+							</a>-->
 
-			  <!-- Graphs -->
-			  <div id="content">
-			    <article class="box post">
+						<!-- Features -->
+							<section id="features">
+								<!--<header class="style1">
+									<h2>Dolor consequat feugiat amet veroeros</h2>
+									<p>Feugiat dolor nullam orci pretium phasellus justo</p>
+								</header>-->
+								<div class="feature-list">
+									<div class="row">
+										<div class="6u 12u(mobile)">
+											<section>
+												<h3><center>Pre Patch 5.13</center></h3>
+												<center><div id="carryRate511"></div></center>
+												<center>
+												<div>Carry Rate</div>	
+												<div id="totalCarried511">Total Games Carried: </div>
+												<div id="totalGames511">Total Games Analyzed: </div>
+												<div id="kda511">Average KDA: </div>
+												<div id="killPart511">Average Kill Participation: </div>
+												<div id="damage511">Average Damage Dealt Per Game: </div>
+												<div id="damagePerc511">Average Percent of Team's Damage: </div>
+												</center></p>
+												
+											</section>
+										</div>
+										<div class="6u 12u(mobile)">
+											<section>
+												<h3><center>Post Patch 5.13</center></h3>
+												<center><div id="carryRate514"></div></center>
+												<center>
+												<div>Carry Rate</div>											
+												<div id="totalCarried514">Total Games Carried: </div>
+												<div id="totalGames514">Total Games Analyzed: </div>
+												<div id="kda514">Average KDA: </div>
+												<div id="killPart514">Average Kill Participation: </div>
+												<div id="damage514">Average Damage Dealt Per Game: </div>
+												<div id="damagePerc514">Average Percent of Team's Damage: </div>
+												</center></p>
+											</section>
+										</div>
+									</div>
+								</div>
 
-			      <!-- Item Graph -->
-				  <header class="style1">
-				    <h2>Item Synergy<br class="mobile-hide" /></h2>
-					<p>Top 5 items built in carried games from each patch. <br>There may be overlap so anywhere from 5-10 will show up.</p>
-				  </header>				
-				  <center>
-				    <div id="champion-item-graph-legend" width="550" height="30">5.11: <img src="/static/images/darkBox.png"><br>	5.14: <img src="/static/images/lightBox.png"></div>
-					<div id="champion-item-graph-container" width="550" height="400"><canvas id="champion-item-graph" width="550" height="400"></canvas></div>
-					<div id="champion-item-graph-images-container" width="550" height="55"></div>
-				  </center>
-				</article>
 
-				<!-- Champion Synergy Graph-->
-				<article class="box post">
-				  <header class="style1">
-				    <h2>Champion Synergy<br class="mobile-hide" /></h2>
-					<p>Top 5 teammates in carried games from each patch. <br>There may be overlap so anywhere from 5-10 will show up.</p>
-				  </header>
-				  <center>
-				    <div id="champion-champion-graph-legend" width="550" height="30">5.11: <img src="/static/images/darkBox.png"><br>	5.14: <img src="/static/images/lightBox.png"></div>
-					<div id="champion-champion-graph-container" width="550" height="400"><canvas id="champion-champion-graph" width="550" height="400"></canvas></div>
-					<div id="champion-champion-graph-images-container" width="550" height="55"></div>
-				  </center>
-				</article>
-			  </div>
+							</section>
 
-			  <script>
-				(function($) {
-				  $.fn.countTo = function(options) {
-				  
-				    // Merge the default plugin settings with the custom options
-				    options = $.extend({}, $.fn.countTo.defaults, options || {});
+						<!-- Content -->
+							<div id="content">
 
-				    // How many times to update the value, and how much to increment the value on each update
-				    var loops = Math.ceil(options.speed / options.refreshInterval),
+								<article class="box post">
+
+									<header class="style1">
+										<h2>Item Synergy<br class="mobile-hide" />
+										</h2>
+										<p>Top 5 items built in carried games from each patch. <br>There may be overlap so anywhere from 5-10 will show up.</p>
+									</header>
+									<!--<a href="#" class="image featured">
+										<img src="images/pic01.jpg" alt="" />
+									</a>-->
+									<center>
+									<div id="champion-item-graph-legend" width="550" height="30">5.11: <img src="/static/images/darkBox.png"><br>	5.14: <img src="/static/images/lightBox.png"></div>
+									<div id="champion-item-graph-container" width="550" height="400"><canvas id="champion-item-graph" width="550" height="400"></canvas></div>
+									<div id="champion-item-graph-images-container" width="550" height="55"></div>
+									</center>
+								</article>
+
+								<article class="box post">
+									<header class="style1">
+										<h2>Champion Synergy<br class="mobile-hide" />
+										</h2>
+										<p>Top 5 teammates in carried games from each patch. <br>There may be overlap so anywhere from 5-10 will show up.</p>
+									</header>
+									<center>
+									<div id="champion-champion-graph-legend" width="550" height="30">5.11: <img src="/static/images/darkBox.png"><br>	5.14: <img src="/static/images/lightBox.png"></div>
+									<div id="champion-champion-graph-container" width="550" height="400"><canvas id="champion-champion-graph" width="550" height="400"></canvas></div>
+									<div id="champion-champion-graph-images-container" width="550" height="55"></div>
+									</center>
+								</article>
+							</div>
+
+							<script>
+							(function($) {
+							    $.fn.countTo = function(options) {
+							        // merge the default plugin settings with the custom options
+							        options = $.extend({}, $.fn.countTo.defaults, options || {});
+
+							        // how many times to update the value, and how much to increment the value on each update
+							        var loops = Math.ceil(options.speed / options.refreshInterval),
 							            increment = (options.to - options.from) / loops;
 
-				    return $(this).each(function() {
-					  var _this = this,
-					      loopCount = 0,
-					      value = options.from,
-						  interval = setInterval(updateTimer, options.refreshInterval);
+							        return $(this).each(function() {
+							            var _this = this,
+							                loopCount = 0,
+							                value = options.from,
+							                interval = setInterval(updateTimer, options.refreshInterval);
 
-				    function updateTimer() {
-					  value += increment;
-					  loopCount++;
-					  $(_this).html(value.toFixed(options.decimals) + "%");
+							            function updateTimer() {
+							                value += increment;
+							                loopCount++;
+							                $(_this).html(value.toFixed(options.decimals) + "%");
 
-					  if (typeof(options.onUpdate) == 'function') {
-					    options.onUpdate.call(_this, value);
-					  }
+							                if (typeof(options.onUpdate) == 'function') {
+							                    options.onUpdate.call(_this, value);
+							                }
 
-					  if (loopCount >= loops) {
-					    clearInterval(interval);
-				        value = options.to;
+							                if (loopCount >= loops) {
+							                    clearInterval(interval);
+							                    value = options.to;
 
-						if (typeof(options.onComplete) == 'function') {
-						  options.onComplete.call(_this, value);
-						}
-					  }
-					}
-				 });
-				};
+							                    if (typeof(options.onComplete) == 'function') {
+							                        options.onComplete.call(_this, value);
+							                    }
+							                }
+							            }
+							        });
+							    };
 
-				$.fn.countTo.defaults = {
-				  from: 0,  // Number the element should start at
-				  to: 100,  // Mumber the element should end at
-				  speed: 1000,  // How long it should take to count between target numbers
-				  refreshInterval: 100,  // How often the element should be updated
-				  decimals: 0,  // Number of decimal places to show
-				  onUpdate: null,  // Callback method for every time the element is updated,
-				  onComplete: null,  // Callback method for when the element finishes updating
-				};
-			    })(jQuery);
+							    $.fn.countTo.defaults = {
+							        from: 0,  // the number the element should start at
+							        to: 100,  // the number the element should end at
+							        speed: 1000,  // how long it should take to count between the target numbers
+							        refreshInterval: 100,  // how often the element should be updated
+							        decimals: 0,  // the number of decimal places to show
+							        onUpdate: null,  // callback method for every time the element is updated,
+							        onComplete: null,  // callback method for when the element finishes updating
+							    };
+							})(jQuery);
 
-				function convertJson(jsonStr) {
-				  jsonStr = jsonStr.replace(/&quot;/g, "\"");
-				  jsonStr = jsonStr.replace(/\\&#39;/g, "\'");
-				  return JSON.parse(jsonStr);
-				}
-				
-				var curRegion = "total";
-				var data = "{{ data }}";
-				data = convertJson(data);
+					        /*$('.timer').countTo({
+					            from: 50,
+					            to: 2500,
+					            speed: 5000,
+					            refreshInterval: 50,
+					            onComplete: function(value) {
+					                console.debug(this);
+					            }
+					        });)*/
 
-				var champDict = "{{ champDict }}";
-				champDict = convertJson(champDict);
-				var itemDict = "{{ itemDict }}";
-				itemDict = convertJson(itemDict);
-				var champId = "{{ champId }}";
 
-				data["title"] = data["title"].replace(/&#39;/g, "\'");
-				data["name"] = data["name"].replace(/&#39;/g, "\'");
-				$("#champName").text(data["name"]);
-				$("#champTitle").text(data["title"]);
-				
-				// Set background of the top with the sexy large splash image
-				$("#header-wrapper").css("background", 'url("/static/images/large/' + champId + '.jpg")');
-				$("#header-wrapper").css("background-size", 'cover');
+							function convertJson(jsonStr) {
+								jsonStr = jsonStr.replace(/&quot;/g, "\"");
+								jsonStr = jsonStr.replace(/\\&#39;/g, "\'");
+								return JSON.parse(jsonStr);
+							}
+							var curRegion = "total";
+							var data = "{{ data }}";
+							data = convertJson(data);
 
-				function invalidId(id) {
-				  if(id === champId) return true;
-				  id = parseInt(id);
-				  if(id >= 3340 && id <= 3342) return true; // Trinkets
-				  if(id >= 3361 && id <= 3364) return true; // Upgraded trinkets
-				  if(id >= 1054 && id <= 1056) return true; // Doran's
-				  if(id === 1001) return true; // Boots
-				  if(id >= 1300 && id <= 1341) return true; // New boot enchants
-				  if(id >= 3250 && id <= 3284) return true; // Old boot enchants
-				  if(id === 3006 || id === 3009 || id === 3111 || id === 3020 || id === 3117 || id === 3047 || id === 3158) return true; // Tier 2 boots
-				  if(id === 2041) return true; // Flask
-				  return false;
-				}
+							var champDict = "{{ champDict }}";
+							champDict = convertJson(champDict);
+							var itemDict = "{{ itemDict }}";
+							itemDict = convertJson(itemDict);
+							var champId = "{{ champId }}";
 
-				function getTopData(key, curRegion, data) {
-				  var result = [];
-				  var dataPoints = [];
-				  var obj = data["5.11"][curRegion][key];
-				  for(var id in obj) {
-					if(invalidId(id)) continue; // Don't care about ourself when it comes to synergy
-					if(obj.hasOwnProperty(id)) { // Avoid prototype keys
-					  dataPoints.push([id, obj[id]]); //store in format [id, count]
-					}
-				  }
-				  
-				  // Sort in descending order
-				  dataPoints.sort(function(a, b) {
-					if (a[1] < b[1]) { return 1; } // Index 1 because care about counts
-					else if (a[1] == b[1]) { return 0; }
-					else { return -1; }
-				  });
-				
-				  dataPoints = dataPoints.slice(0, 5); // Get top 5
-				  for(var i = 0; i < dataPoints.length; i++) {
-				    result.push(dataPoints[i][0]); // Just want id
-				  }
-				  
-				  // Patch 5.14
-				  dataPoints = [];
-				  obj = data["5.14"][curRegion][key];
-				  for(var id in obj) {
-					if(invalidId(id)) continue; // Don't care about ourself or certain items for synergy
-					if(obj.hasOwnProperty(id)) { // To avoid prototype keys
-					  dataPoints.push([id, obj[id]]); // Store in format [id, count]
-					}
-				  }
-				  
-				  // Sort in descending order
-				  dataPoints.sort(function(a, b) {
-					if (a[1] < b[1]) { return 1; } // Index 1 because care about counts
-					else if (a[1] == b[1]) { return 0; }
-					else { return -1; }
-				  });
-				
-				  dataPoints = dataPoints.slice(0, 5); // Get top 5
-				  for(var i = 0; i < dataPoints.length; i++) {
-					if(result.indexOf(dataPoints[i][0]) < 0) // make sure isn't already in result
-					result.push(dataPoints[i][0]); // just want id
-				  }
+							data["title"] = data["title"].replace(/&#39;/g, "\'");
+							data["name"] = data["name"].replace(/&#39;/g, "\'");
+							$("#champName").text(data["name"]);
+							$("#champTitle").text(data["title"]);
+							// set background of the top with the sexy large splash image
+							$("#header-wrapper").css("background", 'url("/static/images/large/' + champId + '.jpg")');
+							$("#header-wrapper").css("background-size", 'cover');
 
-				  return result;
+							function invalidId(id) {
+								if(id === champId) return true;
+								id = parseInt(id);
+								if(id >= 3340 && id <= 3342) return true; //trinkets
+								if(id >= 3361 && id <= 3364) return true; //upgraded trinkets
+								if(id >= 1054 && id <= 1056) return true; //doran's
+								if(id === 1001) return true; //boots
+								if(id >= 1300 && id <= 1341) return true; //new boot enchants
+								if(id >= 3250 && id <= 3284) return true; //old boot enchants
+								if(id === 3006 || id === 3009 || id === 3111 || id === 3020 || id === 3117 || id === 3047 || id === 3158) return true; //tier 2 boots
+								if(id === 2041) return true; // flask
+								return false;
+							}
 
-				}
+							function getTopData(key, curRegion, data) {
+								var result = [];
+								var dataPoints = [];
+								var obj = data["5.11"][curRegion][key];
+								for(var id in obj) {
+									if(invalidId(id)) continue; // don't care about ourself when it comes to synergy
+									if(obj.hasOwnProperty(id)) { // to avoid prototype keys
+										dataPoints.push([id, obj[id]]); //store in format [id, count]
+									}
+								}
+								// sort in descending order
+								dataPoints.sort(function(a, b) {
+									if (a[1] < b[1]) { return 1; } // index 1 because care about counts
+							        else if (a[1] == b[1]) { return 0; }
+							        else { return -1; }
+								});
+								dataPoints = dataPoints.slice(0, 5); //get top 5
+								for(var i = 0; i < dataPoints.length; i++) {
+									result.push(dataPoints[i][0]); // just want id
+								}
+								// now to do 5.14
+								dataPoints = [];
+								obj = data["5.14"][curRegion][key];
+								for(var id in obj) {
+									if(invalidId(id)) continue; // don't care about ourself or certain items when it comes to synergy
+									if(obj.hasOwnProperty(id)) { // to avoid prototype keys
+										dataPoints.push([id, obj[id]]); //store in format [id, count]
+									}
+								}
+								// sort in descending order
+								dataPoints.sort(function(a, b) {
+									if (a[1] < b[1]) { return 1; } // index 1 because care about counts
+							        else if (a[1] == b[1]) { return 0; }
+							        else { return -1; }
+								});
+								dataPoints = dataPoints.slice(0, 5); //get top 5
+								for(var i = 0; i < dataPoints.length; i++) {
+									if(result.indexOf(dataPoints[i][0]) < 0) // make sure isn't already in result
+										result.push(dataPoints[i][0]); // just want id
+								}
 
-				function format(floatVar) {
-				  floatVar = floatVar.toFixed(2);
-					return floatVar.toString();
-				}
+								return result;
 
-				function renderRegion(curRegion) {
-				  if(curRegion !== "total") curRegion = curRegion.toUpperCase();
-				  data511 = data["5.11"][curRegion];
-				  data514 = data["5.14"][curRegion];
+							}
 
-				  if(champId === "51") // Caitlyn was disabled
-				    $("#carryRate511").text("Disabled");
-				  else {
-					var carryRate511 = (data511["gamesCarried"] / data511["gamesPlayed"] * 100).toFixed(2);
-					if(isNaN(carryRate511)) carryRate511 = 0;
-					$('#carryRate511').countTo({
-						from: 0.00,
-						to: carryRate511,
-						speed: 800,
-						decimals: 2,
-						refreshInterval: 50,
-						onComplete: function(value) {
-							//console.debug(this);
-					    }
-					});		        
-				}
-				
-				var carryRate514 = (data514["gamesCarried"] / data514["gamesPlayed"] * 100).toFixed(2);
-				if(isNaN(carryRate514)) carryRate514 = 0;
-				//$("#carryRate511").text(carryRate511.toString() + "%");
-				//$("#carryRate514").text(carryRate514.toString() + "%");
-				$('#carryRate514').countTo({
-				  from: 0.00,
-			      to: carryRate514,
-				  speed: 800,
-				  decimals: 2,
-				  refreshInterval: 50,
-				  onComplete: function(value) {
-					//console.debug(this);
-			      }
-				});
+							function format(floatVar) {
+								floatVar = floatVar.toFixed(2);
+								return floatVar.toString();
+							}
 
-				$("#totalCarried511").text("Games Carried: " + data511["gamesCarried"]);
-				$("#totalGames511").text("Games Played: " + data511["gamesPlayed"]);
-				$("#kda511").text("Average KDA: " + format(data511["kda"]));
-				$("#killPart511").text("Average Kill Participation: " + format(data511["killPart"]));
-				$("#damage511").text("Average Damage Dealt: " + Math.round(data511["damage"]));
-				$("#damagePerc511").text("Average Percent of Team's Damage: " + format(data511["damagePerc"]));
+							function renderRegion(curRegion) {
+								if(curRegion !== "total") curRegion = curRegion.toUpperCase();
+								data511 = data["5.11"][curRegion];
+								data514 = data["5.14"][curRegion];
 
-				$("#totalCarried514").text("Games Carried: " + data514["gamesCarried"]);
-				$("#totalGames514").text("Games Played: " + data514["gamesPlayed"]);
-				$("#kda514").text("Average KDA: " + format(data514["kda"]));
-				$("#killPart514").text("Average Kill Participation: " + format(data514["killPart"]));
-				$("#damage514").text("Average Damage Dealt: " + Math.round(data514["damage"]));
-				$("#damagePerc514").text("Average Percent of Team's Damage: " + format(data514["damagePerc"]));
+						        if(champId === "51") // Caitlyn was disabled
+						        	$("#carryRate511").text("Disabled");
+						        else {
+									var carryRate511 = (data511["gamesCarried"] / data511["gamesPlayed"] * 100).toFixed(2);
+									if(isNaN(carryRate511)) carryRate511 = 0;
+									$('#carryRate511').countTo({
+							            from: 0.00,
+							            to: carryRate511,
+							            speed: 800,
+							            decimals: 2,
+							            refreshInterval: 50,
+							            onComplete: function(value) {
+							                //console.debug(this);
+							            }
+							        });
+						        }
+								var carryRate514 = (data514["gamesCarried"] / data514["gamesPlayed"] * 100).toFixed(2);
+								if(isNaN(carryRate514)) carryRate514 = 0;
+								//$("#carryRate511").text(carryRate511.toString() + "%");
+								//$("#carryRate514").text(carryRate514.toString() + "%");
+								$('#carryRate514').countTo({
+						            from: 0.00,
+						            to: carryRate514,
+						            speed: 800,
+						            decimals: 2,
+						            refreshInterval: 50,
+						            onComplete: function(value) {
+						                //console.debug(this);
+						            }
+						        });
 
-				var items = getTopData("items", curRegion, data); // holds strings of the ids
-				var champs = getTopData("champs", curRegion, data);
+								$("#totalCarried511").text("Games Carried: " + data511["gamesCarried"]);
+								$("#totalGames511").text("Games Played: " + data511["gamesPlayed"]);
+								$("#kda511").text("Average KDA: " + format(data511["kda"]));
+								$("#killPart511").text("Average Kill Participation: " + format(data511["killPart"]));
+								$("#damage511").text("Average Damage Dealt: " + Math.round(data511["damage"]));
+								$("#damagePerc511").text("Average Percent of Team's Damage: " + format(data511["damagePerc"]));
 
-				var itemLabels = []
-				var itemCounts511 = []
-				var itemCounts514 = []
-				$("#champion-item-graph-images-container").empty(); // remove old images
-				for(var i = 0; i < items.length; i++) {
-				  itemLabels.push(itemDict[parseInt(items[i])].replace(/&#39;/g, "'"));
-				  itemCounts511.push(data["5.11"][curRegion]["items"][items[i]]);
-				  itemCounts514.push(data["5.14"][curRegion]["items"][items[i]]);
-				  $("#champion-item-graph-images-container").append('<img src="/static/images/small/blank.png" width="10" height="50"><a href="/items/' + items[i] + '"><img class="graphImage" src="/static/images/small/' + items[i] + '.png" width="50" height="50"></a>')
-				}
+								$("#totalCarried514").text("Games Carried: " + data514["gamesCarried"]);
+								$("#totalGames514").text("Games Played: " + data514["gamesPlayed"]);
+								$("#kda514").text("Average KDA: " + format(data514["kda"]));
+								$("#killPart514").text("Average Kill Participation: " + format(data514["killPart"]));
+								$("#damage514").text("Average Damage Dealt: " + Math.round(data514["damage"]));
+								$("#damagePerc514").text("Average Percent of Team's Damage: " + format(data514["damagePerc"]));
 
-				var itemBarData = {
-				  labels : itemLabels,
-				  datasets : [
-				    {
-				      fillColor : "#48A497",
-				      strokeColor : "#48A4D1",
-				      data : itemCounts511
-				    },
-				    {
-				      fillColor : "rgba(73,188,170,0.4)",
-				      strokeColor : "rgba(72,174,209,0.4)",
-				      data : itemCounts514
-				    }
-				  ]
-				}
+								var items = getTopData("items", curRegion, data); // holds strings of the ids
+								var champs = getTopData("champs", curRegion, data);
 
-				$("#champion-item-graph").remove(); // Remove old graph
-				$('#champion-item-graph-container').append('<canvas id="champion-item-graph" width="550" height="400"></canvas>');
-				var graph = document.getElementById("champion-item-graph").getContext("2d");
-				new Chart(graph).Bar(itemBarData, {
-				  scaleShowGridLines: false,
-				  barStrokeWidth : 1,
-				  barDatasetSpacing : 1, 
-				});
+								var itemLabels = []
+								var itemCounts511 = []
+								var itemCounts514 = []
+								$("#champion-item-graph-images-container").empty(); // remove old images
+								for(var i = 0; i < items.length; i++) {
+									itemLabels.push(itemDict[parseInt(items[i])].replace(/&#39;/g, "'"));
+									itemCounts511.push(data["5.11"][curRegion]["items"][items[i]]);
+									itemCounts514.push(data["5.14"][curRegion]["items"][items[i]]);
+									$("#champion-item-graph-images-container").append('<img src="/static/images/small/blank.png" width="10" height="50"><a href="/items/' + items[i] + '"><img class="graphImage" src="/static/images/small/' + items[i] + '.png" width="50" height="50"></a>')
+								}
 
-				var champLabels = []
-				var champCounts511 = []
-				var champCounts514 = []
-				$("#champion-champion-graph-images-container").empty(); // Remove old images
+								var itemBarData = {
+								    labels : itemLabels,
+								    datasets : [
+								      {
+								        fillColor : "#48A497",
+								        strokeColor : "#48A4D1",
+								        data : itemCounts511
+								      },
+								      {
+								        fillColor : "rgba(73,188,170,0.4)",
+								        strokeColor : "rgba(72,174,209,0.4)",
+								        data : itemCounts514
+								      }
+								    ]
+								}
+								$("#champion-item-graph").remove(); // remove old graph
+								$('#champion-item-graph-container').append('<canvas id="champion-item-graph" width="550" height="400"></canvas>');
+								var graph = document.getElementById("champion-item-graph").getContext("2d");
+								new Chart(graph).Bar(itemBarData, {
+								    scaleShowGridLines: false,
+								    barStrokeWidth : 1,
+								    barDatasetSpacing : 1, 
+								});
 
-				for(var i = 0; i < champs.length; i++) {
-				  champLabels.push(champDict[parseInt(champs[i])].replace(/&#39;/g, "'"));
-				  champCounts511.push(data["5.11"][curRegion]["champs"][champs[i]]);
-				  champCounts514.push(data["5.14"][curRegion]["champs"][champs[i]]); // ghetto padding since I'm tired of fighting css
-				  $("#champion-champion-graph-images-container").append('<img src="/static/images/small/blank.png" width="10" height="50"><a href="/champions/' + champs[i] + '"><img src="/static/images/small/' + champs[i] + '.png" width="50" height="50"></a>');
-				}
-				
-				//$("#champion-champion-graph-images-container").append('<span class="stretch"></span>'); // for spacing out images
-				var champBarData = {
-				  labels : champLabels,
-				  datasets : [
-				    {
-				      fillColor : "#48A497",
-				      strokeColor : "#48A4D1",
-				      data : champCounts511
-				    },
-				    {
-				      fillColor : "rgba(73,188,170,0.4)",
-				      strokeColor : "rgba(72,174,209,0.4)",
-				      data : champCounts514
-				    }
-				  ]
-				}
+								var champLabels = []
+								var champCounts511 = []
+								var champCounts514 = []
+								$("#champion-champion-graph-images-container").empty(); // remove old images
+								for(var i = 0; i < champs.length; i++) {
+									champLabels.push(champDict[parseInt(champs[i])].replace(/&#39;/g, "'"));
+									champCounts511.push(data["5.11"][curRegion]["champs"][champs[i]]);
+									champCounts514.push(data["5.14"][curRegion]["champs"][champs[i]]); // ghetto padding since I'm tired of fighting css
+									$("#champion-champion-graph-images-container").append('<img src="/static/images/small/blank.png" width="10" height="50"><a href="/champions/' + champs[i] + '"><img src="/static/images/small/' + champs[i] + '.png" width="50" height="50"></a>');
+								}
+								//$("#champion-champion-graph-images-container").append('<span class="stretch"></span>'); // for spacing out images
+								var champBarData = {
+								    labels : champLabels,
+								    datasets : [
+								      {
+								        fillColor : "#48A497",
+								        strokeColor : "#48A4D1",
+								        data : champCounts511
+								      },
+								      {
+								        fillColor : "rgba(73,188,170,0.4)",
+								        strokeColor : "rgba(72,174,209,0.4)",
+								        data : champCounts514
+								      }
+								    ]
+								}
+								$("#champion-champion-graph").remove(); // remove old graph
+								$('#champion-champion-graph-container').append('<canvas id="champion-champion-graph" width="550" height="400"></canvas>');
+								var graph = document.getElementById("champion-champion-graph").getContext("2d");
+								var chart = new Chart(graph).Bar(champBarData, {
+								    scaleShowGridLines: false,
+								    barStrokeWidth : 1,
+								    barDatasetSpacing : 1, 
+								});
+							}
 
-				$("#champion-champion-graph").remove(); // remove old graph
-				$('#champion-champion-graph-container').append('<canvas id="champion-champion-graph" width="550" height="400"></canvas>');
-				var graph = document.getElementById("champion-champion-graph").getContext("2d");
-				var chart = new Chart(graph).Bar(champBarData, {
-				  scaleShowGridLines: false,
-				  barStrokeWidth : 1,
-				  barDatasetSpacing : 1, 
-				});
-			    }
+							$( ".button.style2" ).click(function(event) {
+								var key = event.target.value;
+								key = key.toLowerCase();
+								$("#" + curRegion + "Button").css("background", "none"); // change this color if you want
+								$(event.target).css("background-color", "#d96760");
+								curRegion = key;
+								renderRegion(curRegion);
+							});
 
-		        $( ".button.style2" ).click(function(event) {
-				  var key = event.target.value;
-				  key = key.toLowerCase();
-				  $("#" + curRegion + "Button").css("background", "none"); // change this color if you want
-				  $(event.target).css("background-color", "#d96760");
-				  curRegion = key;
-				  renderRegion(curRegion);
-			    });
+							//start on overall
+							$("#totalButton").trigger("click");
+							</script>
 
-			    // Start on overall
-			    $("#totalButton").trigger("click");
-			  </script>
+					</div>
+				</div>
 
-			</div>
-		  </div>
+			<!-- Footer -->
+				<div id="footer-wrapper" class="wrapper">
+					
+					<div id="copyright">
+						<ul>
+							<li>&copy; Untitled.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</div>
+				</div>
 
- 	  <!-- Footer -->
-	  <div id="footer-wrapper" class="wrapper">
-		<div id="copyright">
-			<ul>
-				<li>&copy; Ryanblob, Silverqe.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-			</ul>
-		</div>
-	</div>
 
 	</div>
 
