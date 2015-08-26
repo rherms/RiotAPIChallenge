@@ -29,44 +29,35 @@
 	</head>
 	<body class="no-sidebar">
 		<div id="page-wrapper">
-
 			<!-- Header -->
-				<div id="header-wrapper" class="wrapper">
-					<div id="header">
-						<!-- Nav -->
+			<div id="header-wrapper" class="wrapper">
+				<div id="header">
+					<!-- Nav -->
 					<nav id="nav" width="0" height ="0">
 						<ul>
 							<a href="/" class="button style3">Home</a>
 							<p id="result-container"></p>
-
-						        	<div style="margin:0 auto; text-align: center; width:50%;" class="typeahead-container">
-						            <div style="margin:0 auto; width:50%;"class="typeahead-field">
-
-							            <span style="width:70%;" class="typeahead-query">
-							                <input id="q"
-							                       name="q"
-							                       type="search"
-							                       autofocus
-							                       autocomplete="off"
-							                       style="text-align:center;"
-							                       placeholder="Champion or Item Name">
-							            </span>
-						            </div>
-						        </div>
-								<script language="javascript" type="text/javascript" src="/static/jquery-1.8.3.js"></script>
-<script src="/static/scripts/my-typeahead.js"></script>
-					
+						    <div style="margin:0 auto; text-align: center; width:50%;" class="typeahead-container">
+						    <div style="margin:0 auto; width:50%;"class="typeahead-field">
+							 <span style="width:70%;" class="typeahead-query">
+							 <input id="q"
+		                       name="q"
+		                       type="search"
+		                       autofocus
+		                       autocomplete="off"
+		                       style="text-align:center;"
+		                       placeholder="Champion or Item Name">
+				            </span>	
+				            </div>
+					        </div>
+							<script src="/static/scripts/my-typeahead.js"></script>
 						</ul>
 					</nav>
-					
-					
-
-						<!-- Logo -->
-							<div id="logo">
-								<h1 id="champName"></h1>
-								<p id="champTitle"></p>
-							</div>
-
+					<!-- Logo -->
+					<div id="logo">
+						<h1 id="champName"></h1>
+						<p id="champTitle"></p>
+					</div>
 					</div>
 				</div>
 
@@ -81,19 +72,9 @@
 						<button value="EUNE" class="button style2" id="euneButton">EUNE</button>  
 						<button value="BR" class="button style2" id="brButton">BR</button> 
 					</center> <br>
-					<!--<div class="title">No Sidebar</div>-->
 					<div id="main" class="container" id="na">
-						<!-- Image -->
-							<!--<a href="#" class="image featured">
-								<img src="images/pic01.jpg" alt="" />
-							</a>-->
-
 						<!-- Features -->
 							<section id="features">
-								<!--<header class="style1">
-									<h2>Dolor consequat feugiat amet veroeros</h2>
-									<p>Feugiat dolor nullam orci pretium phasellus justo</p>
-								</header>-->
 								<div class="feature-list">
 									<div class="row">
 										<div class="6u 12u(mobile)">
@@ -130,7 +111,6 @@
 									</div>
 								</div>
 
-
 							</section>
 
 						<!-- Content -->
@@ -143,9 +123,6 @@
 										</h2>
 										<p>Top 5 items built in carried games from each patch. <br>There may be overlap so anywhere from 5-10 will show up.</p>
 									</header>
-									<!--<a href="#" class="image featured">
-										<img src="images/pic01.jpg" alt="" />
-									</a>-->
 									<center>
 									<div id="champion-item-graph-legend" width="550" height="30">5.11: <img src="/static/images/darkBox.png"><br>	5.14: <img src="/static/images/lightBox.png"></div>
 									<div id="champion-item-graph-container" width="550" height="400"><canvas id="champion-item-graph" width="550" height="400"></canvas></div>
@@ -168,6 +145,7 @@
 							</div>
 
 							<script>
+							//countTo library for animating carry rates
 							(function($) {
 							    $.fn.countTo = function(options) {
 							        // merge the default plugin settings with the custom options
@@ -215,22 +193,14 @@
 							    };
 							})(jQuery);
 
-					        /*$('.timer').countTo({
-					            from: 50,
-					            to: 2500,
-					            speed: 5000,
-					            refreshInterval: 50,
-					            onComplete: function(value) {
-					                console.debug(this);
-					            }
-					        });)*/
-
-
+							//since Django templates escape quotes
 							function convertJson(jsonStr) {
 								jsonStr = jsonStr.replace(/&quot;/g, "\"");
 								jsonStr = jsonStr.replace(/\\&#39;/g, "\'");
 								return JSON.parse(jsonStr);
 							}
+
+							//start with overall data
 							var curRegion = "total";
 							var data = "{{ data }}";
 							data = convertJson(data);
@@ -249,6 +219,7 @@
 							$("#header-wrapper").css("background", 'url("/static/images/large/' + champId + '.jpg")');
 							$("#header-wrapper").css("background-size", 'cover');
 
+							//don't care about certain items
 							function invalidId(id) {
 								if(id === champId) return true;
 								id = parseInt(id);
@@ -263,6 +234,7 @@
 								return false;
 							}
 
+							//gets top 5 games carried from each patch (either items or champions) for use in the graphs
 							function getTopData(key, curRegion, data) {
 								var result = [];
 								var dataPoints = [];
@@ -281,7 +253,8 @@
 								});
 								dataPoints = dataPoints.slice(0, 5); //get top 5
 								for(var i = 0; i < dataPoints.length; i++) {
-									result.push(dataPoints[i][0]); // just want id
+									if(dataPoints[i][1] !== 0) //make sure games carried isn't 0
+										result.push(dataPoints[i][0]); // just want id
 								}
 								// now to do 5.14
 								dataPoints = [];
@@ -300,7 +273,7 @@
 								});
 								dataPoints = dataPoints.slice(0, 5); //get top 5
 								for(var i = 0; i < dataPoints.length; i++) {
-									if(result.indexOf(dataPoints[i][0]) < 0) // make sure isn't already in result
+									if(result.indexOf(dataPoints[i][0]) < 0 && dataPoints[i][1] !== 0) // make sure isn't already in result and games carried isn't 0
 										result.push(dataPoints[i][0]); // just want id
 								}
 
@@ -308,17 +281,19 @@
 
 							}
 
+							//rounds a float to 2 decimals and returns the string
 							function format(floatVar) {
 								floatVar = floatVar.toFixed(2);
 								return floatVar.toString();
 							}
 
+							//triggered when a region button is pressed. displays the proper data for that region.
 							function renderRegion(curRegion) {
 								if(curRegion !== "total") curRegion = curRegion.toUpperCase();
 								data511 = data["5.11"][curRegion];
 								data514 = data["5.14"][curRegion];
 
-						        if(champId === "51") // Caitlyn was disabled
+						        if(champId === "51" || champId === "126") // Caitlyn and Jayce disabled
 						        	$("#carryRate511").text("Disabled");
 						        else {
 									var carryRate511 = (data511["gamesCarried"] / data511["gamesPlayed"] * 100).toFixed(2);
@@ -366,75 +341,95 @@
 								var items = getTopData("items", curRegion, data); // holds strings of the ids
 								var champs = getTopData("champs", curRegion, data);
 
-								var itemLabels = []
-								var itemCounts511 = []
-								var itemCounts514 = []
-								$("#champion-item-graph-images-container").empty(); // remove old images
-								for(var i = 0; i < items.length; i++) {
-									itemLabels.push(itemDict[parseInt(items[i])].replace(/&#39;/g, "'"));
-									itemCounts511.push(data["5.11"][curRegion]["items"][items[i]]);
-									itemCounts514.push(data["5.14"][curRegion]["items"][items[i]]);
-									$("#champion-item-graph-images-container").append('<img src="/static/images/small/blank.png" width="10" height="50"><a href="/items/' + items[i] + '"><img class="graphImage" src="/static/images/small/' + items[i] + '.png" width="50" height="50"></a>')
+								if(items.length === 0) {
+									$("#champion-item-graph-container").text("0 games carried :(");
+									$("#champion-item-graph-container").css("font-size", "30px");
+									$("#champion-item-graph-container").css("font-weight", "Bold");
+									$("#champion-item-graph-legend").css("display", "none");
+								}
+								else {
+									var itemLabels = []
+									var itemCounts511 = []
+									var itemCounts514 = []
+									$("#champion-item-graph-images-container").empty(); // remove old images
+									for(var i = 0; i < items.length; i++) {
+										//get the item name from the itemDict, get the counts for the graph, and get the images
+										itemLabels.push(itemDict[parseInt(items[i])].replace(/&#39;/g, "'"));
+										itemCounts511.push(data["5.11"][curRegion]["items"][items[i]]);
+										itemCounts514.push(data["5.14"][curRegion]["items"][items[i]]);
+										$("#champion-item-graph-images-container").append('<img src="/static/images/small/blank.png" width="10" height="50"><a href="/items/' + items[i] + '"><img class="graphImage" src="/static/images/small/' + items[i] + '.png" width="50" height="50"></a>')
+									}
+
+									var itemBarData = {
+									    labels : itemLabels,
+									    datasets : [
+									      {
+									        fillColor : "#48A497",
+									        strokeColor : "#48A4D1",
+									        data : itemCounts511
+									      },
+									      {
+									        fillColor : "rgba(73,188,170,0.4)",
+									        strokeColor : "rgba(72,174,209,0.4)",
+									        data : itemCounts514
+									      }
+									    ]
+									}
+									$("#champion-item-graph").remove(); // remove old graph
+									$('#champion-item-graph-container').append('<canvas id="champion-item-graph" width="550" height="400"></canvas>');
+									var graph = document.getElementById("champion-item-graph").getContext("2d");
+									//make new graph
+									new Chart(graph).Bar(itemBarData, {
+									    scaleShowGridLines: false,
+									    barStrokeWidth : 1,
+									    barDatasetSpacing : 1, 
+									});
 								}
 
-								var itemBarData = {
-								    labels : itemLabels,
-								    datasets : [
-								      {
-								        fillColor : "#48A497",
-								        strokeColor : "#48A4D1",
-								        data : itemCounts511
-								      },
-								      {
-								        fillColor : "rgba(73,188,170,0.4)",
-								        strokeColor : "rgba(72,174,209,0.4)",
-								        data : itemCounts514
-								      }
-								    ]
+								if(champs.length === 0) {
+									$("#champion-champion-graph-container").text("0 games carried :(");
+									$("#champion-champion-graph-container").css("font-size", "30px");
+									$("#champion-champion-graph-container").css("font-weight", "Bold");
+									$("#champion-champion-graph-legend").css("display", "none");
 								}
-								$("#champion-item-graph").remove(); // remove old graph
-								$('#champion-item-graph-container').append('<canvas id="champion-item-graph" width="550" height="400"></canvas>');
-								var graph = document.getElementById("champion-item-graph").getContext("2d");
-								new Chart(graph).Bar(itemBarData, {
-								    scaleShowGridLines: false,
-								    barStrokeWidth : 1,
-								    barDatasetSpacing : 1, 
-								});
-
-								var champLabels = []
-								var champCounts511 = []
-								var champCounts514 = []
-								$("#champion-champion-graph-images-container").empty(); // remove old images
-								for(var i = 0; i < champs.length; i++) {
-									champLabels.push(champDict[parseInt(champs[i])].replace(/&#39;/g, "'"));
-									champCounts511.push(data["5.11"][curRegion]["champs"][champs[i]]);
-									champCounts514.push(data["5.14"][curRegion]["champs"][champs[i]]); // ghetto padding since I'm tired of fighting css
-									$("#champion-champion-graph-images-container").append('<img src="/static/images/small/blank.png" width="10" height="50"><a href="/champions/' + champs[i] + '"><img src="/static/images/small/' + champs[i] + '.png" width="50" height="50"></a>');
+								else {
+									var champLabels = []
+									var champCounts511 = []
+									var champCounts514 = []
+									$("#champion-champion-graph-images-container").empty(); // remove old images
+									for(var i = 0; i < champs.length; i++) {
+										//get the champ name from the champDict, get the counts for the graph, and get the images
+										champLabels.push(champDict[parseInt(champs[i])].replace(/&#39;/g, "'"));
+										champCounts511.push(data["5.11"][curRegion]["champs"][champs[i]]);
+										champCounts514.push(data["5.14"][curRegion]["champs"][champs[i]]); // ghetto padding since I'm tired of fighting css
+										$("#champion-champion-graph-images-container").append('<img src="/static/images/small/blank.png" width="10" height="50"><a href="/champions/' + champs[i] + '"><img src="/static/images/small/' + champs[i] + '.png" width="50" height="50"></a>');
+									}
+									//$("#champion-champion-graph-images-container").append('<span class="stretch"></span>'); // for spacing out images
+									var champBarData = {
+									    labels : champLabels,
+									    datasets : [
+									      {
+									        fillColor : "#48A497",
+									        strokeColor : "#48A4D1",
+									        data : champCounts511
+									      },
+									      {
+									        fillColor : "rgba(73,188,170,0.4)",
+									        strokeColor : "rgba(72,174,209,0.4)",
+									        data : champCounts514
+									      }
+									    ]
+									}
+									$("#champion-champion-graph").remove(); // remove old graph
+									$('#champion-champion-graph-container').append('<canvas id="champion-champion-graph" width="550" height="400"></canvas>');
+									var graph = document.getElementById("champion-champion-graph").getContext("2d");
+									//make new graph
+									var chart = new Chart(graph).Bar(champBarData, {
+									    scaleShowGridLines: false,
+									    barStrokeWidth : 1,
+									    barDatasetSpacing : 1, 
+									});
 								}
-								//$("#champion-champion-graph-images-container").append('<span class="stretch"></span>'); // for spacing out images
-								var champBarData = {
-								    labels : champLabels,
-								    datasets : [
-								      {
-								        fillColor : "#48A497",
-								        strokeColor : "#48A4D1",
-								        data : champCounts511
-								      },
-								      {
-								        fillColor : "rgba(73,188,170,0.4)",
-								        strokeColor : "rgba(72,174,209,0.4)",
-								        data : champCounts514
-								      }
-								    ]
-								}
-								$("#champion-champion-graph").remove(); // remove old graph
-								$('#champion-champion-graph-container').append('<canvas id="champion-champion-graph" width="550" height="400"></canvas>');
-								var graph = document.getElementById("champion-champion-graph").getContext("2d");
-								var chart = new Chart(graph).Bar(champBarData, {
-								    scaleShowGridLines: false,
-								    barStrokeWidth : 1,
-								    barDatasetSpacing : 1, 
-								});
 							}
 
 							$( ".button.style2" ).click(function(event) {
