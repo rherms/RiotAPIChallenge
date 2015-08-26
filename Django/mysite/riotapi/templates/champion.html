@@ -12,6 +12,7 @@
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="/static/assets/css/champion-page.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<link rel="stylesheet" href="/static/src/jquery.typeahead.css">
 
 		<!-- Scripts -->
 
@@ -23,6 +24,7 @@
 		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 		<script src="/static/assets/js/main.js"></script>
 		<script src='/static/Chart.js-master/Chart.min.js'></script>
+		<script src="/static/src/jquery.typeahead.js"></script>
 
 	</head>
 	<body class="no-sidebar">
@@ -31,6 +33,32 @@
 			<!-- Header -->
 				<div id="header-wrapper" class="wrapper">
 					<div id="header">
+						<!-- Nav -->
+					<nav id="nav" width="0" height ="0">
+						<ul>
+							<a href="/" class="button style3">Home</a>
+						</ul>
+					</nav>
+					
+					<p id="result-container"></p>
+
+						        	<div style="margin:0 auto; text-align: center; width:50%;" class="typeahead-container">
+						            <div style="margin:0 auto; width:50%;"class="typeahead-field">
+
+							            <span style="width:70%;" class="typeahead-query">
+							                <input id="q"
+							                       name="q"
+							                       type="search"
+							                       autofocus
+							                       autocomplete="off"
+							                       style="text-align:center;"
+							                       placeholder="Champion or Item Name">
+							            </span>
+						            </div>
+						        </div>
+								<script language="javascript" type="text/javascript" src="/static/jquery-1.8.3.js"></script>
+<script src="/static/scripts/my-typeahead.js"></script>
+					
 
 						<!-- Logo -->
 							<div id="logo">
@@ -43,12 +71,7 @@
 
 			<!-- Main -->
 				<div class="wrapper style2">
-					<!-- Nav -->
-					<nav id="nav">
-						<ul>
-							<a href="/" class="button style3">Home</a>
-						</ul>
-					</nav>
+					
 					<center>
 						<button value="total" class="button style2" id="totalButton">Overall</button> 
 						<button value="NA" class="button style2" id="naButton">NA</button> 

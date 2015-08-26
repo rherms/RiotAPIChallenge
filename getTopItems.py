@@ -5,7 +5,7 @@ def getTop10(champs):
 	for champ in champs:
 		for key in champ:
 			keys.append(key)
-	keys = heapq.nlargest(20, keys)
+	keys = heapq.nlargest(30, keys)
 	top10 = []
 	for champ in champs:
 		for key in champ:
@@ -22,12 +22,12 @@ for jsonFile in os.listdir(path):
 		for line in f:
 			line = line.strip()
 			data = json.loads(line)
-			if(data["5.11"]["total"]["gamesBuilt"] < 9787):
+			if(data["5.11"]["total"]["gamesBuilt"] == 0):#< 9787 / 2):
 				carryRate511 = 0
 			else:
 				carryRate511 = float(data["5.11"]["total"]["gamesCarried"]) / float(data["5.11"]["total"]["gamesBuilt"])
 				#carryRate511 = int(data["5.11"]["total"]["gamesCarried"])
-			if(data["5.14"]["total"]["gamesBuilt"] < 9787):
+			if(data["5.14"]["total"]["gamesBuilt"] ==0):#< 9787 / 2):
 				carryRate514 = 0
 			else:
 				carryRate514 = float(data["5.14"]["total"]["gamesCarried"]) / float(data["5.14"]["total"]["gamesBuilt"])

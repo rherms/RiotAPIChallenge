@@ -22,12 +22,12 @@ for jsonFile in os.listdir(path):
 		for line in f:
 			line = line.strip()
 			data = json.loads(line)
-			if(data["5.11"]["total"]["gamesPlayed"] < 3994): # 3994 is average gamesPlayed of all champs
+			if(data["5.11"]["total"]["gamesPlayed"] == 0): #3994 / 2): # 3994 is average gamesPlayed of all champs
 				carryRate511 = 0
 			else:
 				carryRate511 = float(data["5.11"]["total"]["gamesCarried"]) / float(data["5.11"]["total"]["gamesPlayed"])
 				#carryRate511 = int(data["5.11"]["total"]["gamesCarried"])
-			if(data["5.14"]["total"]["gamesPlayed"] < 3994): 
+			if(data["5.14"]["total"]["gamesPlayed"]== 0):#3994 / 2): 
 				carryRate514 = 0
 			else:
 				carryRate514 = float(data["5.14"]["total"]["gamesCarried"]) / float(data["5.14"]["total"]["gamesPlayed"])
