@@ -6,295 +6,305 @@
 -->
 <html>
 	{% load staticfiles %}
-	<head>
-		<title>Escape Velocity by HTML5 UP</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="/static/assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="{% static "assets/css/main.css" %}" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-		<link rel="stylesheet" href="/static/src/jquery.typeahead.css">
 
-    	<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-    	<script src="/static/assets/js/jquery.min.js"></script>
+  <!-- TITLE & SCRIPTS-->
+  <head>
+	<title>The Art of Carrying</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!--[if lte IE 8]><script src="/static/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="{% static "assets/css/main.css" %}" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	<link rel="stylesheet" href="/static/src/jquery.typeahead.css">
+
+	<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+	<script src="/static/assets/js/jquery.min.js"></script>
+	<script src="/static/assets/js/jquery.dropotron.min.js"></script>
+	<script src="/static/assets/js/skel.min.js"></script>
+	<script src="/static/assets/js/skel-viewport.min.js"></script>
+	<script src="/static/assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="/static/assets/js/main.js"></script>
+	<!--script src=../dist/jquery.typeahead.min.js" %}"></script-->
+	<script src="/static/src/jquery.typeahead.js"></script>
+  </head>
+
+  <!-- SEARCH BAR & NAVIGATION -->
+  <body class="homepage">
+	<div id="page-wrapper">
+
+	  <!-- Header -->
+	  <div id="header-wrapper" class="wrapper">
+	    <div id="header">
+	      <div id="logo">
+	        <h1>The Art of Carrying</h1>
+			<p>Compare champion and item carry rates pre and post patch 5.13</p><br>
+
+		    <!-- Search Bar -->
+			<div style="margin-left:40px;">
+			  <p id="result-container"></p>
+			    <div style="margin:0 auto; text-align: center; width:50%;" class="typeahead-container">
+				  <div style="margin:0 auto; width:50%;"class="typeahead-field">
+				    <span style="width:70%;" class="typeahead-query">
+					  <input id="q"
+                       		 name="q"
+                       		 type="search"
+                       		 autofocus
+                       		 autocomplete="off"
+                       		 style="text-align:center;"
+                       		 placeholder="Champion or Item Name">
+            		</span>
+				  </div>
+				</div>
+			</div>
+			<script src="/static/scripts/my-typeahead.js"></script>
+		  </div>
+
+		  <!-- Nav -->
+		  <nav id="nav">
+			<ul>
+			  <li class="current"><a href="/">Home</a></li>
+			  <li><a href="http://na.leagueoflegends.com/en/news/game-updates/patch/patch-513-notes">Patch 5.13</a></li>
+			  <li><a href id="topItemsHref">Top Items</a></li>
+			  <li><a href id="topChampsHref">Top Champions</a></li>
+			  <li><a href id="aboutProjectHref">About our Project</a></li>
+			  <li><a href id="aboutUsHref">About Us</a></li>
+			</ul>
+		  </nav>
+		</div>
+	  </div>
+
+	  <!-- OVERALL TOP CHAMPIONS -->
+	  <div id="intro-wrapper" class="wrapper style1">
+		<div id="top-champs" class="title">Top Champions By Carry Rate</div>
+		  <section id="intro" class="container">
+			<p class="style1"><strong>Champions with the highest carry rates across both patches . . . </strong></p>
+			
+			<!-- Top AP Champs -->
+			<p class="style2">
+			  <span class="triplet-image">
+				<a href="/champions/30"><img src="/static/images/small/30.png" class="champion-spotlight-image"/></a><br>
+				<font style="font-size: 30px; margin-left: 10px;">29.6%</font>	
+			  </span>	
+			  
+			  <span class="triplet-image">
+				<a href="/champions/101"><img src="/static/images/small/101.png" class="champion-spotlight-image"/></a><br>
+				<font style="font-size: 30px; margin-left: 10px;">27.1%</font>	
+			  </span>
+
+			  <span class="triplet-image">
+				<a href="/champions/96"><img src="/static/images/small/96.png" class="champion-spotlight-image"/></a><br>
+				<font style="font-size: 30px; margin-left: 10px;">26.9%</font>	
+			  </span>	
+			
+			  <span class="triplet-image">
+				<a href="/champions/112"><img src="/static/images/small/112.png" class="champion-spotlight-image"/></a><br>
+				<font style="font-size: 30px; margin-left: 10px;">26.6%</font>	
+			  </span>
+
+			  <span class="triplet-image">
+				<a href="/champions/115"><img src="/static/images/small/115.png" class="champion-spotlight-image"/></a><br>
+				<font style="font-size: 30px; margin-left: 10px;">24.9%</font>	
+			  </span>	
+			</p>
+
+			<!-- Top AD Champs -->
+			<p class="style2">
+			  <span class="triplet-image">
+				<a href="/champions/119"><img src="/static/images/small/119.png" class="champion-spotlight-image"/></a><br>
+				<font style="font-size: 30px; margin-left: 10px;">24.3%</font>	
+			  </span>	
+							
+			  <span class="triplet-image">
+				<a href="/champions/110"><img src="/static/images/small/110.png" class="champion-spotlight-image"/></a><br>
+				<font style="font-size: 30px; margin-left: 10px;">23.3%</font>	
+			  </span>	
+
+			  <span class="triplet-image">
+				<a href="/champions/42"><img src="/static/images/small/42.png" class="champion-spotlight-image"/></a><br>
+				<font style="font-size: 30px; margin-left: 10px;">23.0%</font>	
+			  </span>
+
+			  <span class="triplet-image">
+				<a href="/champions/81"><img src="/static/images/small/81.png" class="champion-spotlight-image"/></a><br>
+				<font style="font-size: 30px; margin-left: 10px;">22.3%</font>	
+			  </span>	
+
+			  <span class="triplet-image">
+				<a href="/champions/91"><img src="/static/images/small/91.png" class="champion-spotlight-image"/></a><br>
+				<font style="font-size: 30px; margin-left: 10px;">21.5%</font>	
+			  </span>	
+			</p>
+		  </section>
+	  </div>
+
+	  <!-- OVERALL TOP ITEMS -->
+	  <div class="wrapper style2">
+	    <div id="top-items" class="title">Top Items</div>
+		  <div id="main" class="container">
+				<section id="features">
+					<header class="style1">
+					<h2>Dolor consequat feugiat amet veroeros</h2>
+					<p>	Feugiat dolor nullam orci pretium phasellus justo</p>
+					</header>
+					<div class="feature-list">
+						<div class="row">
+							<div class="12u 12u(mobile)">
+								<section>
+								<h3>Mattis velit diam vulputate</h3>
+
+								<!-- Top AP Items-->
+								<p>
+									<span class="triplet-image">
+									<a href="/items/3198"><img src="/static/images/small/3198.png" class="champion-spotlight-image"/></a><br>
+									<font style="font-size: 30px; margin-left: 10px;">32.3%</font>
+								</span>
+
+								<span class="triplet-image">
+									<a href="/items/3135"><img src="/static/images/small/3135.png" class="champion-spotlight-image"/></a><br>
+									<font style="font-size: 30px; margin-left: 10px;">29.7%</font>
+								</span>
+
+								<span class="triplet-image">
+									<a href="/items/3089"><img src="/static/images/small/3089.png" class="champion-spotlight-image"/></a><br>
+									<font style="font-size: 30px; margin-left: 10px;">26.4%</font>
+								</span>
+
+								<span class="triplet-image">
+									<a href="/items/3285"><img src="/static/images/small/3285.png" class="champion-spotlight-image"/></a><br>
+									<font style="font-size: 30px; margin-left: 10px;">23.3%</font>
+								</span>
+
+								<span class="triplet-image">
+									<a href="/items/3041"><img src="/static/images/small/3041.png" class="champion-spotlight-image"/></a><br>
+									<font style="font-size: 30px; margin-left: 10px;">22.2%</font>
+								</span>
+								</p>
+							</section>
+						</div>
+					</div>
+
+					<!-- Top AD Items -->
+					<div class="row">
+						<div class="12u 12u(mobile)">
+							<section>
+								<h3>Pretium phasellus justo lorem</h3>
+								<p>
+									<span class="triplet-image">
+										<a href="/items/3139"><img src="/static/images/small/3139.png" class="champion-spotlight-image"/></a><br>
+										<font style="font-size: 30px; margin-left: 10px;">41.0%</font>
+									</span>
+
+									<span class="triplet-image">
+										<a href="/items/3141"><img src="/static/images/small/3141.png" class="champion-spotlight-image"/></a><br>
+									<font style="font-size: 30px; margin-left: 10px;">36.7%</font>
+									</span>
+
+									<span class="triplet-image">
+									<a href="/items/3172"><img src="/static/images/small/3172.png" class="champion-spotlight-image"/></a><br>
+									<font style="font-size: 30px; margin-left: 10px;">31.0%</font>
+									</span>
+
+									<span class="triplet-image">
+									<a href="/items/3072"><img src="/static/images/small/3072.png" class="champion-spotlight-image"/></a><br>
+									<font style="font-size: 30px; margin-left: 10px;">28.3%</font>
+									</span>
+
+									<span class="triplet-image">
+									<a href="/items/3004"><img src="/static/images/small/3004.png" class="champion-spotlight-image"/></a><br>
+									<font style="font-size: 30px; margin-left: 10px;">26.9%</font>
+									</span>
+								</p>
+							</section>
+						</div>
+					</div>
+			</div>
+			</section>
+			</div>
+		</div>
+
+		<!-- ABOUT OUR PROJECT -->
+		<div class="wrapper style3">
+			<div class="title"><a id="about-project" class="page-link">About our Project</a></div>
+			<div id="highlights" class="container">
+				<header class="style1">
+					<h2>Our definition of <strong>"carrying"</strong></h2>
+					<p><strong>Carrying isn't <i>just</i> about KDA. <strong></p>
+					<p>These are just some of the many criteria we considered when determining whether a champion carried: </p><p><strong>kill participation</strong>, <font style="color: #E65555; font-style: oblique;">percentage of team damage</font>, <font style="color: #FFAD33; font-weight: bold;">percentage of team gold earned</font>.</p>
+					<p>Using machine learning along with our criteria for carrying, we analyzed <strong>50,000 total matches</strong> from each patch (pre and post patch 5.13) over five regions to render the data that you see now. </p><br><br>
+					<h2>Major Findings</h2>
+				</header>
+			</div>
+		</div>
+
+		<!-- ABOUT US -->
+		<div id="footer-wrapper" class="wrapper">
+		  <div class="title"><a id="about-us" class="page-link">About Us</a></div>
+				<div id="footer" class="container">
+					<div class="row 150%">
+						<div class="feature-list">
+							<div class="row">
+							  <div class="6u 12u(mobile)">
+									<section>
+									  <header class="style1">
+											<h2> Ryan </h2>
+										</header>
+										<h3><center>"Ryanblob"</center></h3>
+										<p>Ryan is a rising junior at Stanford majoring in Computer Science. He likes to run, swing dance, and play video games. His favorite champion is Vi and he still has faith in Cloud 9.</p>
+									</section>
+								</div>
+								<div class="6u 12u(mobile)">
+									<section>
+										<header class="style1">
+											<h2> Grace Hsieh </h2>
+										</header>
+										<h3><center>"Silverqe"</center></h3>
+										<p>Grace attends Stanford University and is majoring in Computer Science.</p>
+									</section>
+								</div>
+							</div>
+						</div>
+						<div id="copyright">
+							<ul>
+								<li>&copy; Ryanblob, Silverqe</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+		</div>
+
+		<!-- SCRIPTS -->
+		<script src="/static/assets/js/jquery.min.js"></script>
 		<script src="/static/assets/js/jquery.dropotron.min.js"></script>
 		<script src="/static/assets/js/skel.min.js"></script>
 		<script src="/static/assets/js/skel-viewport.min.js"></script>
 		<script src="/static/assets/js/util.js"></script>
-		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+		<!--[if lte IE 8]><script src="/static/assets/js/ie/respond.min.js"></script><![endif]-->
 		<script src="/static/assets/js/main.js"></script>
-    	<!--script src=../dist/jquery.typeahead.min.js" %}"></script-->
-    	<script src="/static/src/jquery.typeahead.js"></script>
-	</head>
-	<body class="homepage">
-		<div id="page-wrapper">
 
-			<!-- Header -->
-				<div id="header-wrapper" class="wrapper">
-					<div id="header">
+		<script>
+			//set up scrolling for nav bar clicks
+			$("#topChampsHref").click(function(event) {
+				$('html, body').animate({
+							scrollTop: $("#top-champs").offset().top
+					}, 800);
+			});
+			$("#topItemsHref").click(function(event) {
+				$('html, body').animate({
+							scrollTop: $("#top-items").offset().top
+					}, 800);
+			});
+			$("#aboutProjectHref").click(function(event) {
+				$('html, body').animate({
+							scrollTop: $("#about-project").offset().top
+					}, 800);
+			});
+			$("#aboutUsHref").click(function(event) {
+				$('html, body').animate({
+							scrollTop: $("#about-us").offset().top
+					}, 800);
+			});
 
-						<!-- Logo -->
-							<div id="logo">
-								<h1>The Art of Carrying</a></h1>
-								<p>Compare champion and item carry rates pre and post patch 5.13</p><br>
-								 <div style="margin-left:40px;"><p id="result-container"></p>
-						        	<div style="margin:0 auto; text-align: center; width:50%;" class="typeahead-container">
-						            <div style="margin:0 auto; width:50%;"class="typeahead-field">
-
-							            <span style="width:70%;" class="typeahead-query">
-							                <input id="q"
-							                       name="q"
-							                       type="search"
-							                       autofocus
-							                       autocomplete="off"
-							                       style="text-align:center;"
-							                       placeholder="Champion or Item Name">
-							            </span>
-						            </div></div>
-						        </div>
-								<script src="/static/scripts/my-typeahead.js"></script>
-								
- 
-								<!--<div class="margin:0 auto; width: 50%;">
-									<a style="height: 51px;" href="#" class="button style2">Search</a>
-								</div>-->
-							</div>
-
-						<!-- Nav -->
-							<nav id="nav">
-								<ul>
-									<li class="current"><a href="/">Home</a></li>
-									<li><a href="http://na.leagueoflegends.com/en/news/game-updates/patch/patch-513-notes">Patch 5.13</a></li>
-									<li><a href id="topItemsHref">Top Items</a></li>
-									<li><a href id="topChampsHref">Top Champions</a></li>
-									<li><a href id="aboutProjectHref">About our Project</a></li>
-									<li><a href id="aboutUsHref">About Us</a></li>
-								</ul>
-							</nav>
-
-					</div>
-				</div>
-
-			<!-- Champions -->
-				<div id="intro-wrapper" class="wrapper style1">
-					<div id="top-champs" class="title">Top Champions By Carry Rate</div>
-					<section id="intro" class="container">
-						<p class="style1"><strong>Champions which maintaintained a high carry rate through both patches!</strong></p>
-						<p class="style2">
-							<span class="triplet-image">
-									<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-									<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-							</span>	
-							<span class="triplet-image">
-									<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-									<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-							</span>	
-							<span class="triplet-image">
-									<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-									<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-							</span>	
-							<span class="triplet-image">
-									<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-									<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-							</span>	
-							<span class="triplet-image">
-									<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-									<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-							</span>	
-						</p>
-						<p class="style2">
-							<span class="triplet-image">
-									<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-									<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-							</span>	
-							<span class="triplet-image">
-									<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-									<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-							</span>	
-							<span class="triplet-image">
-									<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-									<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-							</span>	
-							<span class="triplet-image">
-									<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-									<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-							</span>	
-							<span class="triplet-image">
-									<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-									<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-							</span>	
-						</p>
-					</section>
-				</div>
-
-			<!-- Items -->
-				<div class="wrapper style2">
-					<div id="top-items" class="title">Top Items</div>
-					<div id="main" class="container">
-						<!-- Features -->
-							<section id="features">
-								<header class="style1">
-									<h2>Dolor consequat feugiat amet veroeros</h2>
-									<p>	Feugiat dolor nullam orci pretium phasellus justo</p>
-
-								</header>
-								<div class="feature-list">
-									<div class="row">
-										<div class="12u 12u(mobile)">
-											<section>
-												<h3>Mattis velit diam vulputate</h3>
-												<p>
-													<span class="triplet-image">
-													<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-													<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-													</span>
-
-													<span class="triplet-image">
-													<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-													<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-													</span>
-
-													<span class="triplet-image">
-													<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-													<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-													</span>
-
-													<span class="triplet-image">
-													<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-													<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-													</span>
-
-													<span class="triplet-image">
-													<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-													<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-													</span>
-												</p>
-											</section>
-										</div>
-									</div>
-									<div class="row">
-										<div class="12u 12u(mobile)">
-											<section>
-												<h3>Pretium phasellus justo lorem</h3>
-												<p>
-													<span class="triplet-image">
-													<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-													<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-													</span>
-													<span class="triplet-image">
-													<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-													<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-													</span>
-													<span class="triplet-image">
-													<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-													<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-													</span>
-													<span class="triplet-image">
-													<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-													<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-													</span>
-													<span class="triplet-image">
-													<a href="/champions/131"><img src="/static/images/small/131.png" class="champion-spotlight-image"/></a><br>
-													<font style="font-size: 30px; margin-left: 10px;">21.8%</font>	
-													</span>
-
-												</p>
-											</section>
-										</div>
-										
-									</div>
-								</div>
-							</section>
-
-					</div>
-				</div>
-
-			<!-- About our Project -->
-				<div class="wrapper style3">
-					<div class="title"><a id="about-project" class="page-link">About our Project</a></div>
-					<div id="highlights" class="container">
-						<header class="style1">
-									<h2>Our definition of <strong>"carrying"</strong></h2>
-									<p><strong>Carrying isn't <i>just</i> about KDA. <strong></p>
-									<p>These are just some of the many criteria we considered when determining whether a champion carried: </p><p><strong>kill participation</strong>, <font style="color: #E65555; font-style: oblique;">percentage of team damage</font>, <font style="color: #FFAD33; font-weight: bold;">percentage of team gold earned</font>.</p>
-									<p>Using machine learning along with our criteria for carrying, we analyzed <strong>50,000 total matches</strong> from each patch (pre and post patch 5.13) over five regions to render the data that you see now. </p><br><br>
-
-									<h2>Major Findings</h2>
-						</header>
-					</div>
-				</div>
-
-			<!-- About Us -->
-				<div id="footer-wrapper" class="wrapper">
-					<div class="title"><a id="about-us" class="page-link">About Us</a></div>
-					<div id="footer" class="container">
-						<div class="row 150%">
-								<div class="feature-list">
-									<div class="row">
-										<div class="6u 12u(mobile)">
-											<section>
-												<header class="style1"> 
-													<h2> Ryan </h2>
-												</header>
-												<h3><center>"Ryanblob"</center></h3>
-												<p>Ryan is a rising junior at Stanford majoring in Computer Science. He likes to run, swing dance, and play video games. His favorite champion is Vi and he still has faith in Cloud 9.</p>
-											</section>
-										</div>
-										<div class="6u 12u(mobile)">
-											<section>
-												<header class="style1"> 
-													<h2> Grace Hsieh </h2>
-												</header>
-												<h3><center>"Silverqe"</center></h3>
-												<p>Grace attends Stanford University and is majoring in Computer Science.</p> 
-											</section>
-										</div>
-									</div>
-									
-								</div>
-					<div id="copyright">
-						<ul>
-							<li>&copy; Ryanblob, Silverqe</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-						</ul>
-					</div>
-				</div>
-
-		</div>
-
-		<!-- Scripts -->
-			
-			<script src="/static/assets/js/jquery.min.js"></script>
-			<script src="/static/assets/js/jquery.dropotron.min.js"></script>
-			<script src="/static/assets/js/skel.min.js"></script>
-			<script src="/static/assets/js/skel-viewport.min.js"></script>
-			<script src="/static/assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="/static/assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="/static/assets/js/main.js"></script>
-
-			<script>
-				//set up scrolling for nav bar clicks
-				$("#topChampsHref").click(function(event) {
-					$('html, body').animate({
-				        scrollTop: $("#top-champs").offset().top
-				    }, 800);
-				});
-				$("#topItemsHref").click(function(event) {
-					$('html, body').animate({
-				        scrollTop: $("#top-items").offset().top
-				    }, 800);
-				});
-				$("#aboutProjectHref").click(function(event) {
-					$('html, body').animate({
-				        scrollTop: $("#about-project").offset().top
-				    }, 800);
-				});
-				$("#aboutUsHref").click(function(event) {
-					$('html, body').animate({
-				        scrollTop: $("#about-us").offset().top
-				    }, 800);
-				});
-
-			</script>
-
+		</script>
 	</body>
 </html>
