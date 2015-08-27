@@ -32,32 +32,35 @@
 			<!-- Header -->
 			<div id="header-wrapper" class="wrapper">
 				<div id="header">
+
 					<!-- Nav -->
-					<nav id="nav" width="0" height ="0">
-						<ul>
-							<a href="/" class="button style3">Home</a>
-							<p id="result-container"></p>
-						    <div style="margin:0 auto; text-align: center; width:50%;" class="typeahead-container">
-						    <div style="margin:0 auto; width:50%;"class="typeahead-field">
-							 <span style="width:70%;" class="typeahead-query">
-							 <input id="q"
-		                       name="q"
-		                       type="search"
-		                       autofocus
-		                       autocomplete="off"
-		                       style="text-align:center;"
-		                       placeholder="Champion or Item Name">
-				            </span>	
-				            </div>
-					        </div>
-							<script src="/static/scripts/my-typeahead.js"></script>
-						</ul>
-					</nav>
+					<div style="margin-top:240px; margin-left: 45px; position: relative;">
+							<!--<p id="result-container"></p>-->
+							    <div style="margin:0 auto; text-align: center; width:50%;" class="typeahead-container">
+							    <div style="margin:0 auto; width:50%;"class="typeahead-field">
+								 <span style="width:70%;" class="typeahead-query">
+									 <input id="q"
+				                       name="q"
+				                       type="search"
+				                       autofocus
+				                       autocomplete="off"
+				                       style="" ="text-align:center;"
+				                       placeholder="Champion or Item Name">
+					            </span>	
+					            </div>
+						        </div>
+								<script src="/static/scripts/my-typeahead.js"></script>
+						</div>
 					<!-- Logo -->
 					<div id="logo">
 						<h1 id="champName"></h1>
-						<p id="champTitle"></p>
+						<p id="champTitle" style="margin-top:-1px;"></p>
+						<p style="text-transform: lowercase; font-weight: bold;"><a href="/">Home</a> | <a href="#stats">Statistics</a> | <a href="#graphs">Graphs</a></p>
 					</div>
+
+					
+
+							
 					</div>
 				</div>
 
@@ -65,7 +68,7 @@
 				<div class="wrapper style2">
 					
 					<center>
-						<button value="total" class="button style2" id="totalButton">Overall</button> 
+						<button value="total" class="button style2" id="totalButton"><a name="stats">Overall</a></button> 
 						<button value="NA" class="button style2" id="naButton">NA</button> 
 						<button value="KR" class="button style2" id="krButton">KR</button> 
 						<button value="EUW" class="button style2" id="euwButton">EUW</button>
@@ -79,18 +82,28 @@
 									<div class="row">
 										<div class="6u 12u(mobile)">
 											<section>
-												<h3><center>Pre Patch 5.13</center></h3>
+												<h3><center>Pre Patch 5.13></center></h3>
 												<center><div id="carryRate511"></div></center>
 												<center>
-												<div>Carry Rate</div>	
-												<div id="totalCarried511">Total Games Carried: </div>
-												<div id="totalGames511">Total Games Analyzed: </div>
-												<div>-------Stats From Carried Games-------</div>
-												<div id="kda511">Average KDA: </div>
-												<div id="killPart511">Average Kill Participation: </div>
-												<div id="damage511">Average Damage Dealt Per Game: </div>
-												<div id="damagePerc511">Average Percent of Team's Damage: </div>
-												</center></p>
+												<div style="font-style: italic;">Carry Rate</div><br>		
+
+												<font class="stat-label">Games Carried:</font>
+												<div id="totalCarried511" class="stat"></div><br>
+
+												<font class="stat-label">Games Played:</font>
+												<div id="totalGames511" class="stat"></div><br><br>
+
+												<div><font class="stats-header">Statistics From Carried Games</font></div>
+												<font class="stat-label">Average KDA: </font><div id="kda511" class="stat"></div><br>
+												
+												<font class="stat-label">Average Kill Participation: </font><div id="killPart511" class="stat"></div><br>
+												
+												<font class="stat-label">Average Damage Dealt/Game: </font>
+												<div id="damage511" class="stat">Average Damage Dealt Per Game: </div><br>
+
+												<font class="stat-label">Average Percent of Team's Damage</font>
+												<div id="damagePerc511" class="stat"></div>
+												</center></p><br>
 												
 											</section>
 										</div>
@@ -99,14 +112,23 @@
 												<h3><center>Post Patch 5.13</center></h3>
 												<center><div id="carryRate514"></div></center>
 												<center>
-												<div>Carry Rate</div>											
-												<div id="totalCarried514">Total Games Carried: </div>
-												<div id="totalGames514">Total Games Analyzed: </div>
-												<div>-------Stats From Carried Games-------</div>
-												<div id="kda514">Average KDA: </div>
-												<div id="killPart514">Average Kill Participation: </div>
-												<div id="damage514">Average Damage Dealt Per Game: </div>
-												<div id="damagePerc514">Average Percent of Team's Damage: </div>
+												<div style="font-style: italic;">Carry Rate</div><br>											
+												<font class="stat-label">Games Carried: </font><div id="totalCarried514" class="stat"></div><br>
+
+												<font class="stat-label">Games Analyzed: </font><div id="totalGames514" class="stat"></div><br><br>
+												<div><font class="stats-header">Statistics From Carried Games</font></div>
+
+												<font class="stat-label">Average KDA: </font>
+												<div id="kda514" class="stat"></div><br>
+
+												<font class="stat-label">Average Kill Participation: </font>
+												<div id="killPart514" class="stat"></div><br>
+
+												<font class="stat-label">Average Damage Dealt Per Game: </font>
+												<div id="damage514" style="display:inline-block;"></div><br>
+
+												<font class="stat-label">Average Percent of Team's Damage: </font>
+												<div id="damagePerc514" style="display:inline-block;"></div>
 												</center></p>
 											</section>
 										</div>
@@ -121,7 +143,7 @@
 								<article class="box post">
 
 									<header class="style1">
-										<h2>Item Synergy<br class="mobile-hide" />
+										<h2><a name="graphs">Item Synergy</a><br class="mobile-hide" />
 										</h2>
 										<p>Top 5 items built in carried games from each patch. <br>There may be overlap so anywhere from 5-10 will show up.</p>
 									</header>
@@ -326,19 +348,19 @@
 						            }
 						        });
 
-								$("#totalCarried511").text("Games Carried: " + data511["gamesCarried"]);
-								$("#totalGames511").text("Games Played: " + data511["gamesPlayed"]);
-								$("#kda511").text("Average KDA: " + format(data511["kda"]));
-								$("#killPart511").text("Average Kill Participation: " + format(data511["killPart"]));
-								$("#damage511").text("Average Damage Dealt: " + Math.round(data511["damage"]));
-								$("#damagePerc511").text("Average Percent of Team's Damage: " + format(data511["damagePerc"]));
+								$("#totalCarried511").text(data511["gamesCarried"]);
+								$("#totalGames511").text(data511["gamesPlayed"]);
+								$("#kda511").text(format(data511["kda"]));
+								$("#killPart511").text(format(data511["killPart"]));
+								$("#damage511").text(Math.round(data511["damage"]));
+								$("#damagePerc511").text(format(data511["damagePerc"]));
 
-								$("#totalCarried514").text("Games Carried: " + data514["gamesCarried"]);
-								$("#totalGames514").text("Games Played: " + data514["gamesPlayed"]);
-								$("#kda514").text("Average KDA: " + format(data514["kda"]));
-								$("#killPart514").text("Average Kill Participation: " + format(data514["killPart"]));
-								$("#damage514").text("Average Damage Dealt: " + Math.round(data514["damage"]));
-								$("#damagePerc514").text("Average Percent of Team's Damage: " + format(data514["damagePerc"]));
+								$("#totalCarried514").text(data514["gamesCarried"]);
+								$("#totalGames514").text(data514["gamesPlayed"]);
+								$("#kda514").text(format(data514["kda"]));
+								$("#killPart514").text(format(data514["killPart"]));
+								$("#damage514").text(Math.round(data514["damage"]));
+								$("#damagePerc514").text(format(data514["damagePerc"]));
 
 								var items = getTopData("items", curRegion, data); // holds strings of the ids
 								var champs = getTopData("champs", curRegion, data);
