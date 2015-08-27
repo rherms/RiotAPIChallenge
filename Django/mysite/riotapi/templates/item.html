@@ -89,7 +89,7 @@
 												<div id="totalCarried511">Total Games Carried: </div>
 												<div id="totalGames511">Total Games Analyzed: </div>
 												Stats:
-												<div class="stats"></div>
+												<div id="stats511"></div>
 												</center></p>
 												
 											</section>
@@ -103,7 +103,7 @@
 												<div id="totalCarried514">Total Games Carried: </div>
 												<div id="totalGames514">Total Games Analyzed: </div>
 												Stats:
-												<div class="stats"></div>
+												<div id="stats514"></div>
 												</center></p>
 											</section>
 										</div>
@@ -193,6 +193,44 @@
 							    };
 							})(jQuery);
 
+							function populateStats511(itemId, desc) {
+								var div = $("#stats511");
+								if(itemId === "1058") //needlessly large rod
+									div.html("+80 Ability Power");
+								else if(itemId === "3089") //rabadons
+									div.html(desc.replace("35%", "30%"));
+								else if(itemId === "3157") //zhonyas
+									div.html(desc.replace("100", "120"));
+								else if(itemId === "3285") { //luden's
+									desc = desc.replace("100", "120");
+									div.html(desc.replace("10%", "7%"));
+								}
+								else if(itemId === "3116") {//rylais
+									div.html(desc.replace("<active>Single Target:</active> 40% reduction for 1.5 seconds. <br><active>Area of Effect:</active> 40% reduction for 1 seconds<br><active>Damage over Time or Multi-hit:</active> 20% reduction for 1 seconds.<br><active>Summoned Minions:</active> 20% reduction for 1 seconds.", "<active>Single Target:</active> 35% reduction for 1.5 seconds. <br><active>Area of Effect:</active> 15% reduction for 1 seconds<br><active>Damage over Time or Multi-hit:</active> 15% reduction for 1.5 seconds."));
+								}
+								else if(itemId === "3003") //archangels
+									div.html(desc.replace("80", "60"));
+								else if(itemId === "3040") //seraphs
+									div.html(desc.replace("80", "60"));
+								else if(itemId === "3027") { //rod of ages 
+									desc = desc.replace("300", "450");
+									desc = desc.replace("400", "450");
+									div.html(desc.replace("Grants +20 Health, +40 Mana, and +4 Ability Power per stack (max +200 Health, +400 Mana, and +40 Ability Power).", "Grants +20 Health, +20 Mana, and +2 Ability Power per stack (max +200 Health, +200 Mana, and +20 Ability Power)."));
+								}
+								else if(itemId === "3151") //liandry's
+									div.html(desc.replace("80", "50"));
+								else if(itemId === "3115") { //nashor's
+									desc = desc.replace("40%", "50%");
+									div.html(desc.replace("80", "60"));
+								}
+								else if(itemId === "3152") { //will of the ancients
+									desc = desc.replace('+80 Ability Power', "+20% Spell Vamp<br>+80 Ability Power");
+									div.html(desc.replace("<unique>UNIQUE Passive:</unique> Your spells and abilities heal you for 15% of the damage dealt, calculated before your target&#39;s resistances.  This effect is reduced to one third for AoE effects.", ""));
+								}
+								else
+									div.html(desc);
+							}
+
 
 							function convertJson(jsonStr) {
 								jsonStr = jsonStr.replace(/&quot;/g, "\"");
@@ -216,7 +254,8 @@
 							var desc = data["description"];
 							desc = desc.replace(/&lt;/g, "<");
 							desc = desc.replace(/&gt;/g, ">");
-							$(".stats").html(desc);
+							populateStats511(itemId, desc);
+							$("#stats514").html(desc);
 							$("#champName").text(data["name"]);
 
 							function invalidId(id) {
