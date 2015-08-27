@@ -35,32 +35,31 @@
 					<div id="header">
 
 					<!-- Nav -->
-					<nav id="nav">
-						<a href="/" class="button style3">Home</a>
-						<p id="result-container"></p>
-
-						        	<div style="margin:0 auto; text-align: center; width:50%;" class="typeahead-container">
-						            <div style="margin:0 auto; width:50%;"class="typeahead-field">
-
-							            <span style="width:70%;" class="typeahead-query">
-							                <input id="q"
-							                       name="q"
-							                       type="search"
-							                       autofocus
-							                       autocomplete="off"
-							                       style="text-align:center;"
-							                       placeholder="Champion or Item Name">
-							            </span>
-						            </div>
+					<div style="margin-top:370px; margin-left: 45px; position: relative;">
+							<!--<p id="result-container"></p>-->
+							    <div style="margin:0 auto; text-align: center; width:50%;" class="typeahead-container">
+							    <div style="margin:0 auto; width:50%;"class="typeahead-field">
+								 <span style="width:70%;" class="typeahead-query">
+									 <input id="q"
+				                       name="q"
+				                       type="search"
+				                       autofocus
+				                       autocomplete="off"
+				                       style="" ="text-align:center;"
+				                       placeholder="Champion or Item Name">
+					            </span>	
+					            </div>
 						        </div>
-						        <script src="/static/scripts/my-typeahead.js"></script>
-					</nav>
+								<script src="/static/scripts/my-typeahead.js"></script>
+						</div>
+
 						<!-- Logo -->
 							<div id="logo">
-								<h1 id="champName"></h1>
-								<br>
-								<img id="itemImage" width="100" height="100"></img>
+								<h1 id="champName"></h1><br>
+								<img id="itemImage" style="width: 50px;" />
+								<p style="text-transform: lowercase; font-weight: bold;"><a href="/"><font style="color: black;">Home</font></a> | <a href="#stats"><font style="color: black;">Statistics</font></a> | <a href="#graphs"><font style="color: black;">Graphs</font></a></p>
 							</div>
+
 
 					</div>
 				</div>
@@ -68,7 +67,7 @@
 			<!-- Main -->
 				<div class="wrapper style2">
 					<center>
-						<button value="total" class="button style2" id="totalButton">Overall</button> 
+						<button value="total" class="button style2" id="totalButton"><a name="stats">Overall</a></button> 
 						<button value="NA" class="button style2" id="naButton">NA</button> 
 						<button value="KR" class="button style2" id="krButton">KR</button> 
 						<button value="EUW" class="button style2" id="euwButton">EUW</button>
@@ -85,12 +84,16 @@
 												<h3><center>Pre Patch 5.13</center></h3>
 												<center><div id="carryRate511"></div></center>
 												<center>
-												<div>Carry Rate</div>	
-												<div id="totalCarried511">Total Games Carried: </div>
-												<div id="totalGames511">Total Games Analyzed: </div>
-												Stats:
+												<div style="font-style: italic;">Carry Rate</div>	
+
+												<font class="stat-label">Games Carried: </font><div id="totalCarried511" class="stat"></div><br>
+
+												<font class="stat-label">Games Analyzed: </font>
+												<div id="totalGames511" class="stat"></div><br>
+
+												<!--<font class="stat-label">Stats: </font>
 												<div id="stats511"></div>
-												</center></p>
+												</center></p>-->
 												
 											</section>
 										</div>
@@ -99,13 +102,21 @@
 												<h3><center>Post Patch 5.13</center></h3>
 												<center><div id="carryRate514"></div></center>
 												<center>
-												<div>Carry Rate</div>											
-												<div id="totalCarried514">Total Games Carried: </div>
-												<div id="totalGames514">Total Games Analyzed: </div>
-												Stats:
+												<div style="font-style: italic;">Carry Rate</div>											
+												<font class="stat-label">Games Carried: </font><div id="totalCarried514" class="stat"></div><br>
+												
+												<font class="stat-label">Games Analyzed: </font><div id="totalGames514" class="stat"></div>
+												<!--Stats:
 												<div id="stats514"></div>
-												</center></p>
+												</center></p>-->
 											</section>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="12u 12u(mobile)">
+											<center><h3>Item Details</h3><center>
+											<div id="stats514"></div>
 										</div>
 									</div>
 								</div>
@@ -119,7 +130,7 @@
 								<article class="box post">
 
 									<header class="style1">
-										<h2>Item Synergy<br class="mobile-hide" />
+										<h2><a name="graphs">Item Synergy</a><br class="mobile-hide" />
 										</h2>
 										<p>Top 5 items built along with this one in carried games from each patch. <br>There may be overlap so anywhere from 5-10 will show up.</p>
 									</header>
@@ -356,11 +367,11 @@
 						            }
 						        });
 
-								$("#totalCarried511").text("Games Carried: " + data511["gamesCarried"]);
-								$("#totalGames511").text("Games Played: " + data511["gamesBuilt"]);
+								$("#totalCarried511").text(data511["gamesCarried"]);
+								$("#totalGames511").text(data511["gamesBuilt"]);
 
-								$("#totalCarried514").text("Games Carried: " + data514["gamesCarried"]);
-								$("#totalGames514").text("Games Played: " + data514["gamesBuilt"]);
+								$("#totalCarried514").text(data514["gamesCarried"]);
+								$("#totalGames514").text(data514["gamesBuilt"]);
 
 								var items = getTopData("items", curRegion, data); // holds strings of the ids
 								var champs = getTopData("champs", curRegion, data);
