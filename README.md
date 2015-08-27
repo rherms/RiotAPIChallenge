@@ -1,2 +1,2 @@
-# RiotAPIChallenge
-Entry for Riot's 2nd API Challenge. 
+# Riot API Challenge (August 2015)
+This is our entry for Riot's API Challenge.
