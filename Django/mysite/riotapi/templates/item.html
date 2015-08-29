@@ -57,7 +57,7 @@
 							<div id="logo">
 								<h1 id="champName"></h1><br>
 								<img id="itemImage" style="width: 50px;" />
-								<p style="text-transform: lowercase; font-weight: bold;"><a href="/"><font style="color: black;">Home</font></a> | <a href="#stats"><font style="color: black;">Statistics</font></a> | <a href="#graphs"><font style="color: black;">Graphs</font></a></p>
+								<p style="text-transform: lowercase; font-weight: bold;"><a href="/"><font style="color: black;">Home</font></a> | <a href id="statsHref" onclick="return false;"><font style="color: black;">Statistics</font></a> | <a href id="graphsHref" onclick="return false;"><font style="color: black;">Graphs</font></a></p>
 							</div>
 
 
@@ -66,8 +66,8 @@
 
 			<!-- Main -->
 				<div class="wrapper style2">
-					<center>
-						<button value="total" class="button style2" id="totalButton"><a name="stats">Overall</a></button> 
+					<a id="stats"></a><center>
+						<button value="total" class="button style2" id="totalButton">Overall</button> 
 						<button value="NA" class="button style2" id="naButton">NA</button> 
 						<button value="KR" class="button style2" id="krButton">KR</button> 
 						<button value="EUW" class="button style2" id="euwButton">EUW</button>
@@ -130,7 +130,7 @@
 								<article class="box post">
 
 									<header class="style1">
-										<h2><a name="graphs">Item Synergy</a><br class="mobile-hide" />
+										<h2><a id="graphs">Item Synergy</a><br class="mobile-hide" />
 										</h2>
 										<p>Top 5 items built along with this one in carried games from each patch. <br>There may be overlap so anywhere from 5-10 will show up.</p>
 									</header>
@@ -490,6 +490,21 @@
 						</ul>
 					</div>
 				</div>
+
+		<script>
+			//set up scrolling for nav bar clicks
+			$("#statsHref").click(function(event) {
+				$('html, body').animate({
+							scrollTop: $("#stats").offset().top
+					}, 800);
+			});
+			$("#graphsHref").click(function(event) {
+				$('html, body').animate({
+							scrollTop: $("#graphs").offset().top
+					}, 800);
+			});
+
+		</script>
 
 		</div>
 
