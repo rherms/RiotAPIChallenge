@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title id="champName"></title>
+		<title id="champTabTitle"></title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -55,7 +55,9 @@
 					<div id="logo">
 						<h1 id="champName"></h1>
 						<p id="champTitle" style="margin-top:-1px;"></p>
-						<p style="text-transform: lowercase; font-weight: bold;"><a href="/">Home</a> | <a href="#stats">Statistics</a> | <a href="#graphs">Graphs</a></p>
+						<p style="text-transform: lowercase; font-weight: bold;">
+							<a href="/">Home</a> | <a href="#stats">Statistics</a> | <a href="#graphs">Graphs</a>
+						</p>
 					</div>
 
 					
@@ -82,7 +84,7 @@
 									<div class="row">
 										<div class="6u 12u(mobile)">
 											<section>
-												<h3><center>Pre Patch 5.13></center></h3>
+												<h3><center>Pre Patch 5.13</center></h3>
 												<center><div id="carryRate511"></div></center>
 												<center>
 												<div style="font-style: italic;">Carry Rate</div><br>		
@@ -115,7 +117,7 @@
 												<div style="font-style: italic;">Carry Rate</div><br>											
 												<font class="stat-label">Games Carried: </font><div id="totalCarried514" class="stat"></div><br>
 
-												<font class="stat-label">Games Analyzed: </font><div id="totalGames514" class="stat"></div><br><br>
+												<font class="stat-label">Games Played: </font><div id="totalGames514" class="stat"></div><br><br>
 												<div><font class="stats-header">Statistics From Carried Games</font></div>
 
 												<font class="stat-label">Average KDA: </font>
@@ -238,6 +240,7 @@
 							data["title"] = data["title"].replace(/&#39;/g, "\'");
 							data["name"] = data["name"].replace(/&#39;/g, "\'");
 							$("#champName").text(data["name"]);
+							$("#champTabTitle").text(data["name"]);
 							$("#champTitle").text(data["title"]);
 							// set background of the top with the sexy large splash image
 							$("#header-wrapper").css("background", 'url("/static/images/large/' + champId + '.jpg")');

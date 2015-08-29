@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>No Sidebar - Escape Velocity by HTML5 UP</title>
+		<title id="itemNameTab"></title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -258,16 +258,18 @@
 							itemDict = convertJson(itemDict);
 							var itemId = "{{ itemId }}";
 
-							//data["title"] = data["title"].replace(/&#39;/g, "\'");
 							data["name"] = data["name"].replace(/&#39;/g, "\'");
 
 							$("#itemImage").attr("src", "/static/images/small/" + itemId + ".png");
+
+
 							var desc = data["description"];
 							desc = desc.replace(/&lt;/g, "<");
 							desc = desc.replace(/&gt;/g, ">");
 							populateStats511(itemId, desc);
 							$("#stats514").html(desc);
 							$("#champName").text(data["name"]);
+							$("#itemNameTab").text(data["name"]);
 
 							function invalidId(id) {
 								if(id === itemId) return true;
