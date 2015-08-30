@@ -18,13 +18,24 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
+def loadSecretKey():
+    secretKey = ""
+    with open(os.path.join(BASE_DIR, "secret_key.txt")) as f:
+        for line in f:
+            line = line.strip()
+            secretKey = line
+        f.close()
+    return secretKey
+    
+
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'p14%xi3r3bzan(%!0jz2z@y)a3m^!xrwdxxh4vm+yv3%h82snq'
+SECRET_KEY = loadSecretKey()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
