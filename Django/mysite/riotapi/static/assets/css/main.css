@@ -64,6 +64,10 @@
 		vertical-align: baseline;
 	}
 
+	li {
+		text-align: left;
+	}
+
 	article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
 		display: block;
 	}
